@@ -7,9 +7,9 @@
  * @package steam
  */
 
-if ( ! defined( '_S_VERSION' ) ) {
+if (!defined('_S_VERSION')) {
 	// Replace the version number of the theme on each release.
-	define( '_S_VERSION', '1.0.0' );
+	define('_S_VERSION', '1.0.0');
 }
 
 /**
@@ -19,44 +19,45 @@ if ( ! defined( '_S_VERSION' ) ) {
  * runs before the init hook. The init hook is too late for some features, such
  * as indicating support for post thumbnails.
  */
-function steam_setup() {
+function steam_setup()
+{
 	/*
-		* Make theme available for translation.
-		* Translations can be filed in the /languages/ directory.
-		* If you're building a theme based on steam, use a find and replace
-		* to change 'steam' to the name of your theme in all the template files.
-		*/
-	load_theme_textdomain( 'steam', get_template_directory() . '/languages' );
+	 * Make theme available for translation.
+	 * Translations can be filed in the /languages/ directory.
+	 * If you're building a theme based on steam, use a find and replace
+	 * to change 'steam' to the name of your theme in all the template files.
+	 */
+	load_theme_textdomain('steam', get_template_directory() . '/languages');
 
 	// Add default posts and comments RSS feed links to head.
-	add_theme_support( 'automatic-feed-links' );
+	add_theme_support('automatic-feed-links');
 
 	/*
-		* Let WordPress manage the document title.
-		* By adding theme support, we declare that this theme does not use a
-		* hard-coded <title> tag in the document head, and expect WordPress to
-		* provide it for us.
-		*/
-	add_theme_support( 'title-tag' );
+	 * Let WordPress manage the document title.
+	 * By adding theme support, we declare that this theme does not use a
+	 * hard-coded <title> tag in the document head, and expect WordPress to
+	 * provide it for us.
+	 */
+	add_theme_support('title-tag');
 
 	/*
-		* Enable support for Post Thumbnails on posts and pages.
-		*
-		* @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
-		*/
-	add_theme_support( 'post-thumbnails' );
+	 * Enable support for Post Thumbnails on posts and pages.
+	 *
+	 * @link https://developer.wordpress.org/themes/functionality/featured-images-post-thumbnails/
+	 */
+	add_theme_support('post-thumbnails');
 
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
-			'menu-1' => esc_html__( 'Primary', 'steam' ),
+			'menu-1' => esc_html__('Primary', 'steam'),
 		)
 	);
 
 	/*
-		* Switch default core markup for search form, comment form, and comments
-		* to output valid HTML5.
-		*/
+	 * Switch default core markup for search form, comment form, and comments
+	 * to output valid HTML5.
+	 */
 	add_theme_support(
 		'html5',
 		array(
@@ -83,7 +84,7 @@ function steam_setup() {
 	);
 
 	// Add theme support for selective refresh for widgets.
-	add_theme_support( 'customize-selective-refresh-widgets' );
+	add_theme_support('customize-selective-refresh-widgets');
 
 	/**
 	 * Add support for core custom logo.
@@ -93,14 +94,14 @@ function steam_setup() {
 	add_theme_support(
 		'custom-logo',
 		array(
-			'height'      => 250,
-			'width'       => 250,
-			'flex-width'  => true,
+			'height' => 250,
+			'width' => 250,
+			'flex-width' => true,
 			'flex-height' => true,
 		)
 	);
 }
-add_action( 'after_setup_theme', 'steam_setup' );
+add_action('after_setup_theme', 'steam_setup');
 
 /**
  * Set the content width in pixels, based on the theme's design and stylesheet.
@@ -109,45 +110,83 @@ add_action( 'after_setup_theme', 'steam_setup' );
  *
  * @global int $content_width
  */
-function steam_content_width() {
-	$GLOBALS['content_width'] = apply_filters( 'steam_content_width', 640 );
+function steam_content_width()
+{
+	$GLOBALS['content_width'] = apply_filters('steam_content_width', 640);
 }
-add_action( 'after_setup_theme', 'steam_content_width', 0 );
+add_action('after_setup_theme', 'steam_content_width', 0);
 
 /**
  * Register widget area.
  *
  * @link https://developer.wordpress.org/themes/functionality/sidebars/#registering-a-sidebar
  */
-function steam_widgets_init() {
+function steam_widgets_init()
+{
 	register_sidebar(
 		array(
-			'name'          => esc_html__( 'Sidebar', 'steam' ),
-			'id'            => 'sidebar-1',
-			'description'   => esc_html__( 'Add widgets here.', 'steam' ),
+			'name' => esc_html__('Sidebar', 'steam'),
+			'id' => 'sidebar-1',
+			'description' => esc_html__('Add widgets here.', 'steam'),
 			'before_widget' => '<section id="%1$s" class="widget %2$s">',
-			'after_widget'  => '</section>',
-			'before_title'  => '<h2 class="widget-title">',
-			'after_title'   => '</h2>',
+			'after_widget' => '</section>',
+			'before_title' => '<h2 class="widget-title">',
+			'after_title' => '</h2>',
 		)
 	);
 }
-add_action( 'widgets_init', 'steam_widgets_init' );
+add_action('widgets_init', 'steam_widgets_init');
 
 /**
  * Enqueue scripts and styles.
  */
-function steam_scripts() {
-	wp_enqueue_style( 'steam-style', get_stylesheet_uri(), array(), _S_VERSION );
-	wp_style_add_data( 'steam-style', 'rtl', 'replace' );
+// ====================================================================================
+// Разрешить загрузку SVG
+function allow_svg_upload($mimes)
+{
+	$mimes['svg'] = 'image/svg+xml';
+	return $mimes;
+}
+add_filter('upload_mimes', 'allow_svg_upload');
+// ====================================================================================
+//  ОТКЛЮЧАЕМ jquery для подключение свой jquery
+function disable_default_jquery()
+{
+	wp_deregister_script('jquery');
+}
+add_action('wp_enqueue_scripts', 'disable_default_jquery');
+// ====================================================================================
+function steam_scripts()
+{
+	wp_enqueue_style('steam-style', get_stylesheet_uri(), array(), _S_VERSION);
+	wp_style_add_data('steam-style', 'rtl', 'replace');
 
-	wp_enqueue_script( 'steam-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
+	// wp_enqueue_script('steam-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
 
-	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
-		wp_enqueue_script( 'comment-reply' );
+	// CUSTOM CSS
+	wp_enqueue_style("bootstrap", "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css");
+	wp_enqueue_style("font", "https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
+	wp_enqueue_style("font-awesome", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css");
+	wp_enqueue_style("glider", "https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css");
+	wp_enqueue_style("layout", get_template_directory_uri() . "/assets/css/layout.css");
+	wp_enqueue_style("main", get_template_directory_uri() . "/assets/css/main.css");
+	wp_enqueue_style("responsive", get_template_directory_uri() . "/assets/css/responsive.css");
+
+
+	// CUSTOM JS
+	wp_enqueue_script("jquery", "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js", array(), _S_VERSION, true);
+	wp_enqueue_script("main", get_template_directory_uri() . "/assets/js/main.js", array(), _S_VERSION, true);
+	wp_enqueue_script("glider", "https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js", array(), null, true);
+	wp_enqueue_script("swiper-cdn", "https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js", array(), _S_VERSION, true);
+	wp_enqueue_script("bootstrap", "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js", array(), _S_VERSION, true);
+	wp_enqueue_script("swiper", get_template_directory_uri() . "/assets/js/swiper.js", array(), _S_VERSION, true);
+	wp_enqueue_script("modal", get_template_directory_uri() . "/assets/js/modal.js", array(), _S_VERSION, true);
+
+	if (is_singular() && comments_open() && get_option('thread_comments')) {
+		wp_enqueue_script('comment-reply');
 	}
 }
-add_action( 'wp_enqueue_scripts', 'steam_scripts' );
+add_action('wp_enqueue_scripts', 'steam_scripts');
 
 /**
  * Implement the Custom Header feature.
@@ -172,7 +211,7 @@ require get_template_directory() . '/inc/customizer.php';
 /**
  * Load Jetpack compatibility file.
  */
-if ( defined( 'JETPACK__VERSION' ) ) {
+if (defined('JETPACK__VERSION')) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 

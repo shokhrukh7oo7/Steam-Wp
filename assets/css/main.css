@@ -125,6 +125,7 @@
   border: 1px solid var(--purple);
   background: var(--purple);
   text-align: center;
+  display: flex;
   color: #fff;
   border-radius: 0 12px 12px 0;
   cursor: pointer;
@@ -201,7 +202,7 @@
   width: 100%;
   height: 100%;
   background: linear-gradient(#28273973 45%, #282739a6 65%),
-    url("/assets/images/home/swiper/banner.png");
+    url('<?php echo esc_url($background_url); ?>/assets/images/home/swiper/banner.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
