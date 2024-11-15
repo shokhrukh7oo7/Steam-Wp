@@ -201,8 +201,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(#28273973 45%, #282739a6 65%),
-    url('<?php echo esc_url($background_url); ?>/assets/images/home/swiper/banner.png');
+  background: linear-gradient(#28273973 45%, #282739a6 65%), var(--banner-image);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
@@ -1805,7 +1804,8 @@ swiper-slide img {
   .contact-left-wrapper
   .contact-info
   .contact-info-title
-  .contact-info-desc span {
+  .contact-info-desc
+  span {
   color: var(--black);
   font-weight: 500;
   font-size: clamp(14px, 1.5vw, 18px);

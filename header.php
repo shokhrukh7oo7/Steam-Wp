@@ -35,20 +35,24 @@
 							<a href="#" class="order-call-btn" id="order-call-btn">Заказать звонок</a>
 							<div class="social-box">
 								<a href="#">
-									<img src="<?php echo get_template_directory_uri()?>/assets/images/header/viber.svg" alt="image" />
+									<img src="<?php echo get_template_directory_uri() ?>/assets/images/header/viber.svg"
+										alt="image" />
 								</a>
 								<a href="#">
-									<img src="<?php echo get_template_directory_uri()?>/assets/images/header/whatsapp.svg" alt="image" />
+									<img src="<?php echo get_template_directory_uri() ?>/assets/images/header/whatsapp.svg"
+										alt="image" />
 								</a>
 								<a href="#">
-									<img src="<?php echo get_template_directory_uri()?>/assets/images/header/telegram.svg" alt="image" />
+									<img src="<?php echo get_template_directory_uri() ?>/assets/images/header/telegram.svg"
+										alt="image" />
 								</a>
 							</div>
 						</div>
 
 						<div class="navbar-top-call-wrapper">
 							<a href="#">+998 (50) 074 20 00
-								<img src="<?php echo get_template_directory_uri()?>/assets/images/header/call.svg" alt="image" />
+								<img src="<?php echo get_template_directory_uri() ?>/assets/images/header/call.svg"
+									alt="image" />
 							</a>
 						</div>
 					</div>
@@ -88,7 +92,15 @@
 			<div class="navbar-bottom-wrapper-box">
 				<div class="container">
 					<div class="navbar-bottom-wrapper" id="mobile-menu">
-						<ul>
+						<?php
+						wp_nav_menu([
+							'menu' => 'Меню',
+							'container' => true,
+
+						])
+							?>
+
+						<!-- <ul>
 							<li>
 								<a href="/assets/pages/service.html">Услуги</a>
 							</li>
@@ -106,7 +118,7 @@
 									Акции <i class="fa-solid fa-percent"></i>
 								</a>
 							</li>
-						</ul>
+						</ul> -->
 					</div>
 				</div>
 			</div>
@@ -114,3 +126,89 @@
 		<!-- NAV END -->
 	</header>
 	<!-- HEADER END -->
+
+	<!-- ----- request modal start ----- -->
+	<div class="request-modal hidden" id="request-modal">
+		<div class="request-modal-header">
+			<h1 class="request-modal-header-title">ОСТАВЬТЕ ВАШИ КОНТАКТЫ</h1>
+			<button class="btn close-btn" id="close-btn">
+				<i class="fas fa-close"></i>
+			</button>
+		</div>
+		<div class="request-modal-body">
+			<div class="requset-modal-left">
+				<p class="requset-modal-description">
+					Мы свяжимся с вами и рассчитаем стоимость проекта
+				</p>
+
+				<form>
+					<input type="text" class="form-control request-modal-input" placeholder="Введите свое имя"
+						required />
+					<input type="tel" class="form-control request-modal-input" placeholder="+998(__) ___-__-__"
+						required />
+					<button class="btn request-modal-btn" id="request-modal-btn">
+						Оставить заявку
+					</button>
+				</form>
+
+				<div class="request-modal-checkbox-wrapper">
+					<input type="checkbox" class="request-checkbox" />
+					<p class="request-modal-checkbox-title">
+						Нажимая на кнопку, вы соглашаетесь на обработку персональных
+						данных и <a href="#">политикой конфиденциальности</a>
+					</p>
+				</div>
+			</div>
+			<div class="requset-modal-right">
+				<img src="<?php echo get_template_directory_uri() ?>/assets/images/modal/request-modal.png"
+					alt="image" />
+				<div class="around-image"></div>
+			</div>
+		</div>
+	</div>
+	<!-- ----- request modal end ----- -->
+
+	<!-- ----- order call modal start ----- -->
+	<div class="order-call-modal hidden" id="order-call-modal">
+		<div class="order-call-modal-header">
+			<h1 class="order-call-modal-header-title">
+				МЕНЕДЖЕР ПОЗВОНИТ ВАМ В ТЕЧЕНИИ 5 МИНУТ
+			</h1>
+			<button class="btn close-btn" id="order-close-btn">
+				<i class="fas fa-close"></i>
+			</button>
+		</div>
+		<div class="order-call-modal-body">
+			<div class="order-call-modal-left">
+				<p class="order-call-modal-description">
+					ответит на все вопросы и прокосультирует по продуктам Steam
+				</p>
+
+				<form>
+					<input type="tel" class="form-control order-call-modal-input" placeholder="+998(__) ___-__-__"
+						required />
+					<button class="btn order-call-modal-btn" id="order-call-modal-btn">
+						Позвоните мне
+					</button>
+				</form>
+
+				<div class="order-call-modal-checkbox-wrapper">
+					<input type="checkbox" class="order-call-checkbox" />
+					<p class="order-call-modal-checkbox-title">
+						Нажимая на кнопку, вы соглашаетесь на обработку персональных
+						данных и <a href="#">политикой конфиденциальности</a>
+					</p>
+				</div>
+			</div>
+			<div class="order-call-modal-right">
+				<img src="<?php echo get_template_directory_uri() ?>/assets/images/modal/request-modal.png"
+					alt="image" />
+				<div class="around-image"></div>
+			</div>
+		</div>
+	</div>
+	<!-- ----- order call modal end ----- -->
+
+
+	<div class="overlay hidden" id="overlay"></div>
+	<!-- MAIN END -->
