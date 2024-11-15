@@ -61,10 +61,7 @@
 
 			<div class="container">
 				<nav class="navbar navbar-expand-lg">
-					<a class="navbar-brand" href="/index.html">STEAM</a>
-					<a class="navbar-brand" href="/index.html">
-						<!-- <img src="<?= get_template_directory_uri() ?>/assets/images/logo.svg" alt="image"> -->
-					</a>
+					<?php echo get_custom_logo(); ?>
 					<button class="navbar-toggler" type="button" data-bs-toggle="collapse"
 						data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
 						aria-expanded="false" aria-label="Toggle navigation">
@@ -94,31 +91,14 @@
 					<div class="navbar-bottom-wrapper" id="mobile-menu">
 						<?php
 						wp_nav_menu([
-							'menu' => 'Меню',
+							'theme_location' => 'header',
 							'container' => true,
-
-						])
-							?>
-
-						<!-- <ul>
-							<li>
-								<a href="/assets/pages/service.html">Услуги</a>
-							</li>
-							<li>
-								<a href="/assets/pages/about-us.html">О компании</a>
-							</li>
-							<li>
-								<a href="/assets/pages/galery.html">Галерея</a>
-							</li>
-							<li>
-								<a href="/assets/pages/contact.html">Контакты</a>
-							</li>
-							<li>
-								<a href="#" class="promo">
-									Акции <i class="fa-solid fa-percent"></i>
-								</a>
-							</li>
-						</ul> -->
+							'menu_class' => 'navbar-nav',
+							'menu_id' => false,
+							'echo' => true,
+							'items_wrap' => '<ul id="%1$s" class="%2$s">%3$s</ul>',
+						]);
+						?>
 					</div>
 				</div>
 			</div>

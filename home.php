@@ -448,84 +448,52 @@ get_header();
     </section>
     <!-- CATEGORY PRODUCT END -->
 
-    <!-- CONSTRUCTION SERVICE START -->
+    <!-- CONSTRUCTION SERVICE START (✅)-->
     <section id="c-service">
         <div class="container">
             <div class="construction-service-wrapper">
                 <div class="construction-service-info">
                     <div class="row">
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-3">
-                            <div class="item">
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/c-service-1.png"
-                                    alt="image" />
-                                <h3 class="construction-service-info-header-title">
-                                    Гарантия качества
-                                </h3>
-                                <p class="construction-service-info-description-title">
-                                    Используем только сертифицированные материалы.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-3">
-                            <div class="item">
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/c-service-2.png"
-                                    alt="image" />
-                                <h3 class="construction-service-info-header-title">
-                                    Опыт работы
-                                </h3>
-                                <p class="construction-service-info-description-title">
-                                    15 лет в строительстве бань и саун.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-3">
-                            <div class="item">
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/c-service-3.png"
-                                    alt="image" />
-                                <h3 class="construction-service-info-header-title">
-                                    Индивидуальный подход
-                                </h3>
-                                <p class="construction-service-info-description-title">
-                                    Проект под ключ по вашим пожеланиям.
-                                </p>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-3">
-                            <div class="item">
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/c-service-4.png"
-                                    alt="image" />
-                                <h3 class="construction-service-info-header-title">
-                                    Быстрая доставка
-                                </h3>
-                                <p class="construction-service-info-description-title">
-                                    Быстрая доставка товаров по всей стране
-                                </p>
-                            </div>
-                        </div>
+                        <?php if (have_rows('services')): ?>
+                            <?php while (have_rows('services')):
+                                the_row(); ?>
+                                <div class="col-12 col-sm-6 col-md-4 col-lg-3 my-3">
+                                    <div class="item">
+                                        <img src="<?php the_sub_field('service_image'); ?>" alt="image" />
+                                        <h2 class="construction-service-info-header-title">
+                                            <?php the_sub_field('service_title'); ?>
+                                        </h2>
+                                        <p class="construction-service-info-description-title">
+                                            <?php the_sub_field('service_description'); ?>
+                                        </p>
+                                    </div>
+                                </div>
+                            <?php endwhile; ?>
+                        <?php endif; ?>
                     </div>
                 </div>
 
+
                 <div class="construction-service-banner" style="
-                background-image: url('<?php echo get_template_directory_uri() ?>/assets/images/home/c-service-banner.png');
-              ">
+                background-image: url('<?php the_field('service_banner_image'); ?>');">
                     <!-- <img src="/assets/images/home/c-service-banner.png" alt="image"> -->
                     <div class="construction-service-banner-title-wrapper">
                         <h1 class="construction-service-banner-header-title">
-                            Услуги по строительству
+                            <?php the_field('service_banner_header_title') ?>
                         </h1>
                         <p class="construction-service-banner-description-title">
-                            Мы создаем сауны и бани вашей мечты. Полный цикл - от
-                            проектирования до установки
+                            <?php the_field('service_banner_description') ?>
                         </p>
 
-                        <a href="/assets/pages/about-us.html" class="btn constuction-service-banner-btn">Подробное о
-                            строительстве</a>
+                        <a href="/assets/pages/about-us.html" class="btn constuction-service-banner-btn">
+                            <?php the_field('service_banner_button_text') ?>
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
-    <!-- CONSTRUCTION SERVICE END -->
+    <!-- CONSTRUCTION SERVICE END (✅)--->
 
     <!-- CATALOG PRODUCTS START -->
     <section id="catalog-products">

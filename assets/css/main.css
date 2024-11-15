@@ -69,6 +69,11 @@
 .navbar-wrapper .navbar {
   padding: 20px 0;
 }
+.navbar-wrapper .navbar .custom-logo-link img {
+  width: 100%;
+  max-width: 130px;
+  margin-right: 20px;
+}
 .navbar-wrapper .navbar .navbar-brand {
   font-weight: 700;
   font-size: clamp(24px, 3vw, 35px);
@@ -157,8 +162,15 @@
   display: flex;
   justify-content: start;
   align-items: center;
+  flex-direction: row;
   /* gap: 100px; */
   flex-wrap: wrap;
+}
+.navbar .navbar-nav .nav-item .nav-link.active {
+  border-bottom: 2px solid var(--purple);
+}
+.nav-link.active {
+  border-bottom: 2px solid var(--purple);
 }
 .navbar-wrapper .navbar-bottom-wrapper-box .navbar-bottom-wrapper ul {
   padding: 0;

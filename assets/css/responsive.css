@@ -55,9 +55,12 @@
 @media (max-width: 992px) {
   .navbar-collapse {
     margin: 20px 0;
+    display: flex;
+    align-items: center;
   }
   .navbar-wrapper .navbar .navbar-collapse .search-wrapper {
     max-width: 992px;
+    margin: 10px auto 0;
   }
   .navbar-leave-request-btn-wrapper {
     margin-top: 10px;
@@ -126,6 +129,10 @@
 
 /* ========== 576 ========== */
 @media (max-width: 576px) {
+  .navbar-collapse {
+    margin: 20px 0;
+    display: block;
+  }
   .request-modal .request-modal-body .requset-modal-right {
     display: none;
   }

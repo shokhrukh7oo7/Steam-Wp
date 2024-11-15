@@ -1,3 +1,13 @@
+const navLinks = document.querySelectorAll(".navbar-nav .nav-link");
+navLinks.forEach((link) => {
+  link.addEventListener("click", (e) => {
+    navLinks.forEach((l) => {
+      l.classList.remove("active");
+    });
+    e.target.classList.add("active");
+  });
+});
+
 const tabsList = document.querySelectorAll(".ap-tab-list li");
 const appTabContainer = document.querySelector(".ap-tab-row");
 const cards = document.querySelectorAll(".card");

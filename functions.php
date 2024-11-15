@@ -50,7 +50,8 @@ function steam_setup()
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus(
 		array(
-			'menu-1' => esc_html__('Primary', 'steam'),
+			'header' => esc_html__('Header Menu', 'steam'),
+			'footer' => esc_html__('Footer Menu', 'steam'),
 		)
 	);
 
@@ -214,4 +215,38 @@ require get_template_directory() . '/inc/customizer.php';
 if (defined('JETPACK__VERSION')) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
+// ====================================================================================
+// добавим класс nav-item ко всем пунктам меню
+add_filter('nav_menu_css_class', 'custom_nav_menu_css_class', 10, 1);
+// получаем список всех классов пунктов меню
+function custom_nav_menu_css_class($classes)
+{
+	// добавляем к списку классов свой класс nav-item
+	$classes[] = 'nav-item';
+	// возвращаем список классов уже с нашим классом
+	return $classes;
+}
 
+// ------------------------------------------------------------------------
+
+// повесим на все ссылки класс nav-link
+add_filter('nav_menu_link_attributes', 'custom_nav_menu_link_attributes', 10, 1);
+function custom_nav_menu_link_attributes($atts)
+{
+	$atts['class'] = 'nav-link';
+	return $atts;
+}
+// ------------------------------------------------------------------------
+// для добавление класса active на navbar
+function add_additional_class_on_a($atts, $item, $args)
+{
+	if (isset($args->add_a_class)) {
+		$atts['class'] = isset($atts['class']) ? $atts['class'] . ' ' . $args->add_a_class : $args->add_a_class;
+	}
+	// добавление класс актив
+	if (in_array('current-menu-item', $item->classes) || in_array('current_page_item', $item->classes)) {
+		$atts['class'] = isset($atts['class']) ? $atts['class'] . ' active' : 'active';
+	}
+	return $atts;
+}
+add_filter('nav_menu_link_attributes', 'add_additional_class_on_a', 10, 3);
