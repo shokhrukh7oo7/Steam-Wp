@@ -501,9 +501,9 @@ get_header();
             <div class="catalog-products-wrapper">
                 <div class="catalog-products-wrapper-header-wrapper">
                     <h1 class="catalog-products-wrapper-header-title">
-                        <?php the_field('catalog_header_title')?>
+                        <?php the_field('catalog_header_title') ?>
                     </h1>
-                    <?php 
+                    <?php
                     $catalog_text = get_field('catalog_download_text'); // Текст ссылки
                     $catalog_file = get_field('catalog_file_url'); // URL файла
                     if ($catalog_text && $catalog_file): ?>
@@ -519,18 +519,18 @@ get_header();
     </section>
     <!-- CATALOG PRODUCTS END (✅)-->
 
-    <!-- ACCESSORIEST START -->
+    <!-- ACCESSORIEST START (✅)-->
     <section id="accessories">
         <div class="container">
             <div class="accessories-card-wrapper">
-                <h1 class="accessories-header-titile">Аксесуары</h1>
+                <h1 class="accessories-header-titile"><?php the_field('accessories_header_title') ?></h1>
 
-                <?php get_template_part('template-parts/accessories')?>
+                <?php get_template_part('template-parts/accessories') ?>
 
             </div>
         </div>
     </section>
-    <!-- ACCESSORIEST END -->
+    <!-- ACCESSORIEST END (✅)-->
 
     <!-- FOOTER SWIPER START -->
     <section class="section slider-section">

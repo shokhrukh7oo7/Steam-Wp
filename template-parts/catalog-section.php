@@ -38,8 +38,9 @@
                     </div>
 
                     <div class="catalog-product-btn">
-                        <a href="<?php echo esc_url($catalog_link); ?>" class="btn catalog-product-btn">Смотреть каталог <i
-                                class="fa-solid fa-arrow-right"></i></a>
+                        <a href="<?php echo esc_url($catalog_link); ?>" class="btn catalog-product-btn">
+                            <?php the_field('catalog_btn_title')?>
+                             <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
