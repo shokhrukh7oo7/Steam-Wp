@@ -495,367 +495,38 @@ get_header();
     </section>
     <!-- CONSTRUCTION SERVICE END (✅)--->
 
-    <!-- CATALOG PRODUCTS START -->
+    <!-- CATALOG PRODUCTS START (✅)-->
     <section id="catalog-products">
         <div class="container">
             <div class="catalog-products-wrapper">
                 <div class="catalog-products-wrapper-header-wrapper">
                     <h1 class="catalog-products-wrapper-header-title">
-                        Каталог товаров steam
+                        <?php the_field('catalog_header_title')?>
                     </h1>
-                    <a href="#" class="download-file">Скачать каталог STEAM <i class="fa-solid fa-arrow-right"></i></a>
+                    <?php 
+                    $catalog_text = get_field('catalog_download_text'); // Текст ссылки
+                    $catalog_file = get_field('catalog_file_url'); // URL файла
+                    if ($catalog_text && $catalog_file): ?>
+                        <a href="<?php echo esc_url($catalog_file); ?>" class="download-file" target="_blank">
+                            <?php echo esc_html($catalog_text); ?> <i class="fa-solid fa-arrow-right"></i>
+                        </a>
+                    <?php endif; ?>
                 </div>
 
-                <div class="row">
-                    <div class="col-12 col-md-6 col-xl-4 my-3">
-                        <div class="catalog-item">
-                            <img class="catalog-header-image"
-                                src="<?php echo get_template_directory_uri() ?>/assets/images/home/c-product-1.png"
-                                alt="image" />
-                            <!-- catalog product header -->
-                            <div class="catalog-product-header">
-                                <h3 class="catalog-product-header-title">
-                                    Русские бани и сауны
-                                </h3>
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/c-product-1-1.png"
-                                    alt="image" />
-                            </div>
-                            <!-- catalog product body -->
-                            <div class="catalog-product-body">
-                                <p class="catalog-product-body-description">
-                                    Баня работает при высоком уровне влажности (до 100%),
-                                    температура обычно колеблется от 60°C до 100°C (от 140°F
-                                    до 212°F). Сочетание влажного тепла и пара отличает ее от
-                                    сухой сауны. Вода льется на горячие камни, чтобы
-                                    образовался пар.
-                                </p>
-                            </div>
-
-                            <div class="catalog-product-btn">
-                                <a href="<?php echo get_template_directory_uri() ?>/assets/pages/catalog.html"
-                                    class="btn catalog-product-btn">Смотреть каталог <i
-                                        class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-xl-4 my-3">
-                        <div class="catalog-item">
-                            <img class="catalog-header-image"
-                                src="<?php echo get_template_directory_uri() ?>/assets/images/home/c-product-2.png"
-                                alt="image" />
-                            <!-- catalog product header -->
-                            <div class="catalog-product-header">
-                                <h3 class="catalog-product-header-title">
-                                    Плетеная корзина
-                                </h3>
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/c-product-2-2.png"
-                                    alt="image" />
-                            </div>
-                            <!-- catalog product body -->
-                            <div class="catalog-product-body">
-                                <p class="catalog-product-body-description">
-                                    В сауне тепло в основном исходит от печи с горячими
-                                    камнями. Хотя вы можете плеснуть воды на камни, чтобы
-                                    получить немного пара (по-фински это называется löyly),
-                                    общее впечатление гораздо суше, чем в бане.
-                                </p>
-                            </div>
-
-                            <div class="catalog-product-btn">
-                                <a href="<?php echo get_template_directory_uri() ?>/assets/pages/catalog.html"
-                                    class="btn catalog-product-btn">Смотреть каталог <i
-                                        class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-xl-4 my-3">
-                        <div class="catalog-item">
-                            <img class="catalog-header-image"
-                                src="<?php echo get_template_directory_uri() ?>/assets/images/home/c-product-3.png"
-                                alt="image" />
-                            <!-- catalog product header -->
-                            <div class="catalog-product-header">
-                                <h3 class="catalog-product-header-title">
-                                    Деревянный баскет для сауны
-                                </h3>
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/c-product-3-3.png"
-                                    alt="image" />
-                            </div>
-                            <!-- catalog product body -->
-                            <div class="catalog-product-body">
-                                <p class="catalog-product-body-description">
-                                    Деревянное ведро для сауны — традиционный аксессуар,
-                                    используемый как в русских банях, так и в саунах. Обычно
-                                    его изготавливают из натурального дерева, например,
-                                    березы, дуба или кедра, и используют для хранения воды,
-                                    которую выливают на горячие камни для создания пара в
-                                    сауне или бане.
-                                </p>
-                            </div>
-
-                            <div class="catalog-product-btn">
-                                <a href="<?php echo get_template_directory_uri() ?>/assets/pages/catalog.html"
-                                    class="btn catalog-product-btn">Смотреть каталог <i
-                                        class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-xl-4 my-3">
-                        <div class="catalog-item">
-                            <img class="catalog-header-image"
-                                src="<?php echo get_template_directory_uri() ?>/assets/images/home/c-product-1.png"
-                                alt="image" />
-                            <!-- catalog product header -->
-                            <div class="catalog-product-header">
-                                <h3 class="catalog-product-header-title">
-                                    Русские бани и сауны
-                                </h3>
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/c-product-1-1.png"
-                                    alt="image" />
-                            </div>
-                            <!-- catalog product body -->
-                            <div class="catalog-product-body">
-                                <p class="catalog-product-body-description">
-                                    Баня работает при высоком уровне влажности (до 100%),
-                                    температура обычно колеблется от 60°C до 100°C (от 140°F
-                                    до 212°F). Сочетание влажного тепла и пара отличает ее от
-                                    сухой сауны. Вода льется на горячие камни, чтобы
-                                    образовался пар.
-                                </p>
-                            </div>
-
-                            <div class="catalog-product-btn">
-                                <a href="<?php echo get_template_directory_uri() ?>/assets/pages/catalog.html"
-                                    class="btn catalog-product-btn">Смотреть каталог <i
-                                        class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-xl-4 my-3">
-                        <div class="catalog-item">
-                            <img class="catalog-header-image"
-                                src="<?php echo get_template_directory_uri() ?>/assets/images/home/c-product-2.png"
-                                alt="image" />
-                            <!-- catalog product header -->
-                            <div class="catalog-product-header">
-                                <h3 class="catalog-product-header-title">
-                                    Деревянный баскет для сауны
-                                </h3>
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/c-product-2-2.png"
-                                    alt="image" />
-                            </div>
-                            <!-- catalog product body -->
-                            <div class="catalog-product-body">
-                                <p class="catalog-product-body-description">
-                                    Деревянное ведро для сауны — традиционный аксессуар,
-                                    используемый как в русских банях, так и в саунах. Обычно
-                                    его изготавливают из натурального дерева, например,
-                                    березы, дуба или кедра, и используют для хранения воды,
-                                    которую выливают на горячие камни для создания пара в
-                                    сауне или бане.
-                                </p>
-                            </div>
-
-                            <div class="catalog-product-btn">
-                                <a href="<?php echo get_template_directory_uri() ?>/assets/pages/catalog.html"
-                                    class="btn catalog-product-btn">Смотреть каталог <i
-                                        class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-12 col-md-6 col-xl-4 my-3">
-                        <div class="catalog-item">
-                            <img class="catalog-header-image"
-                                src="<?php echo get_template_directory_uri() ?>/assets/images/home/c-product-3.png"
-                                alt="image" />
-                            <!-- catalog product header -->
-                            <div class="catalog-product-header">
-                                <h3 class="catalog-product-header-title">
-                                    Русские бани и сауны
-                                </h3>
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/c-product-3-3.png"
-                                    alt="image" />
-                            </div>
-                            <!-- catalog product body -->
-                            <div class="catalog-product-body">
-                                <p class="catalog-product-body-description">
-                                    Баня работает при высоком уровне влажности (до 100%),
-                                    температура обычно колеблется от 60°C до 100°C (от 140°F
-                                    до 212°F). Сочетание влажного тепла и пара отличает ее от
-                                    сухой сауны. Вода льется на горячие камни, чтобы
-                                    образовался пар.
-                                </p>
-                            </div>
-
-                            <div class="catalog-product-btn">
-                                <a href="<?php echo get_template_directory_uri() ?>/assets/pages/catalog.html"
-                                    class="btn catalog-product-btn">Смотреть каталог <i
-                                        class="fa-solid fa-arrow-right"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <?php get_template_part('template-parts/catalog-section') ?>
             </div>
         </div>
     </section>
-    <!-- CATALOG PRODUCTS END -->
+    <!-- CATALOG PRODUCTS END (✅)-->
 
     <!-- ACCESSORIEST START -->
     <section id="accessories">
         <div class="container">
             <div class="accessories-card-wrapper">
                 <h1 class="accessories-header-titile">Аксесуары</h1>
-                <div class="row">
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-3">
-                        <div class="item">
-                            <div class="item-header">
-                                <div class="accessories-fashion">ХИТ</div>
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/accessories-1.png"
-                                    alt="image" />
-                            </div>
-                            <div class="item-body">
-                                <h3 class="item-body-header">Сумки</h3>
 
-                                <p class="item-body-sale">3 990 000 UZS</p>
+                <?php get_template_part('template-parts/accessories')?>
 
-                                <p class="item-body-summ">2 990 000 UZS</p>
-
-                                <a href="#" class="btn accessories-btn">Смотреть товары</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-3">
-                        <div class="item">
-                            <div class="item-header">
-                                <div class="accessories-fashion">ХИТ</div>
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/accessories-2.png"
-                                    alt="image" />
-                            </div>
-                            <div class="item-body">
-                                <h3 class="item-body-header">Простыни</h3>
-
-                                <p class="item-body-sale">3 990 000 UZS</p>
-
-                                <p class="item-body-summ">2 990 000 UZS</p>
-
-                                <a href="#" class="btn accessories-btn">Смотреть товары</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-3">
-                        <div class="item">
-                            <div class="item-header">
-                                <div class="accessories-fashion">ХИТ</div>
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/accessories-1.png"
-                                    alt="image" />
-                            </div>
-                            <div class="item-body">
-                                <h3 class="item-body-header">Сумки</h3>
-
-                                <p class="item-body-sale">3 990 000 UZS</p>
-
-                                <p class="item-body-summ">2 990 000 UZS</p>
-
-                                <a href="#" class="btn accessories-btn">Смотреть товары</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-3">
-                        <div class="item">
-                            <div class="item-header">
-                                <div class="accessories-fashion">ХИТ</div>
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/accessories-2.png"
-                                    alt="image" />
-                            </div>
-                            <div class="item-body">
-                                <h3 class="item-body-header">Простыни</h3>
-
-                                <p class="item-body-sale">3 990 000 UZS</p>
-
-                                <p class="item-body-summ">2 990 000 UZS</p>
-
-                                <a href="#" class="btn accessories-btn">Смотреть товары</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-3">
-                        <div class="item">
-                            <div class="item-header">
-                                <div class="accessories-fashion">ХИТ</div>
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/accessories-1.png"
-                                    alt="image" />
-                            </div>
-                            <div class="item-body">
-                                <h3 class="item-body-header">Сумки</h3>
-
-                                <p class="item-body-sale">3 990 000 UZS</p>
-
-                                <p class="item-body-summ">2 990 000 UZS</p>
-
-                                <a href="#" class="btn accessories-btn">Смотреть товары</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-3">
-                        <div class="item">
-                            <div class="item-header">
-                                <div class="accessories-fashion">ХИТ</div>
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/accessories-2.png"
-                                    alt="image" />
-                            </div>
-                            <div class="item-body">
-                                <h3 class="item-body-header">Простыни</h3>
-
-                                <p class="item-body-sale">3 990 000 UZS</p>
-
-                                <p class="item-body-summ">2 990 000 UZS</p>
-
-                                <a href="#" class="btn accessories-btn">Смотреть товары</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-3">
-                        <div class="item">
-                            <div class="item-header">
-                                <div class="accessories-fashion">ХИТ</div>
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/accessories-1.png"
-                                    alt="image" />
-                            </div>
-                            <div class="item-body">
-                                <h3 class="item-body-header">Сумки</h3>
-
-                                <p class="item-body-sale">3 990 000 UZS</p>
-
-                                <p class="item-body-summ">2 990 000 UZS</p>
-
-                                <a href="#" class="btn accessories-btn">Смотреть товары</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-3">
-                        <div class="item">
-                            <div class="item-header">
-                                <div class="accessories-fashion">ХИТ</div>
-                                <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/accessories-2.png"
-                                    alt="image" />
-                            </div>
-                            <div class="item-body">
-                                <h3 class="item-body-header">Простыни</h3>
-
-                                <p class="item-body-sale">3 990 000 UZS</p>
-
-                                <p class="item-body-summ">2 990 000 UZS</p>
-
-                                <a href="#" class="btn accessories-btn">Смотреть товары</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </section>

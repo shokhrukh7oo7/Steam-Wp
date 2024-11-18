@@ -216,6 +216,43 @@ if (defined('JETPACK__VERSION')) {
 	require get_template_directory() . '/inc/jetpack.php';
 }
 // ====================================================================================
+// Каталог товаров steam (панель управление)
+function create_catalog_post_type()
+{
+	register_post_type('catalog_steam',
+		array(
+			'labels' => array(
+				'name' => __('Каталог Steam'),
+				'singular_name' => __('Каталог Steam')
+			),
+			'public' => true,
+			'has_archive' => true,
+			'supports' => array('title', 'editor', 'thumbnail'),
+			'menu_icon' => 'dashicons-products',
+		)
+	);
+}
+add_action('init', 'create_catalog_post_type');
+
+// ====================================================================================
+// Аксессуары (панель управление)
+function create_accessories_post_type()
+{
+	register_post_type('accessories',
+		array(
+			'labels' => array(
+				'name' => __('Аксессуары'),
+				'singular_name' => __('Аксессуары')
+			),
+			'public' => true,
+			'has_archive' => true,
+			'supports' => array('title', 'editor', 'thumbnail'),
+			'menu_icon' => 'dashicons-admin-customizer',
+		)
+	);
+}
+add_action('init', 'create_accessories_post_type');
+// ====================================================================================
 // добавим класс nav-item ко всем пунктам меню
 add_filter('nav_menu_css_class', 'custom_nav_menu_css_class', 10, 1);
 // получаем список всех классов пунктов меню
