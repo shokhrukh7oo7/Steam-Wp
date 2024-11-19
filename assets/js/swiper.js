@@ -1,29 +1,30 @@
 // Glider configuration
-new Glider(document.getElementById("slider"), {
-  // Optional parameters
-  slidesToShow: 1,
-  slidesToScroll: 1,
-  //   draggable: true,
-  rewind: true,
-  duration: 0.5,
-  // dots: ".pagination",
-  arrows: {
-    prev: ".slider-prev",
-    next: ".slider-next",
-  },
+const sliderElement = document.getElementById("slider");
 
-  // Responsive breakpoints
-  responsive: [
-    {
-      breakpoint: 768,
-      settings: {
-        slidesToShow: 1.5,
-        scrollLock: false,
-        rewind: true,
-      },
+if (sliderElement) {
+  new Glider(sliderElement, {
+    // Optional parameters
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    rewind: true,
+    duration: 0.5,
+    arrows: {
+      prev: ".slider-prev",
+      next: ".slider-next",
     },
-  ],
-});
+    // Responsive breakpoints
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 1.5,
+          scrollLock: false,
+          rewind: true,
+        },
+      },
+    ],
+  });
+}
 
 // swiper nasted swiper js
 const sliderImages = document.querySelectorAll(".slider-image");

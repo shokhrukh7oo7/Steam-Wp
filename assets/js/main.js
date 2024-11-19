@@ -14,6 +14,8 @@ const cards = document.querySelectorAll(".card");
 
 // Функция для отображения карточек по категории
 function displayCards(dataCategory) {
+  if (!appTabContainer) return; // Проверка на существование appTabContainer
+
   // Создаем новый контейнер .row для размещения карточек
   const row = document.createElement("div");
   row.classList.add("row");
@@ -38,55 +40,61 @@ function displayCards(dataCategory) {
   appTabContainer.appendChild(row);
 }
 
-// Событие клика по вкладкам
-tabsList.forEach((tabButton) => {
-  tabButton.addEventListener("click", (e) => {
-    const dataCategory = e.target.getAttribute("data-category");
-    console.log(dataCategory);
+// Проверяем, существуют ли вкладки
+if (tabsList.length > 0) {
+  // Событие клика по вкладкам
+  tabsList.forEach((tabButton) => {
+    tabButton.addEventListener("click", (e) => {
+      const dataCategory = e.target.getAttribute("data-category");
+      console.log(dataCategory);
 
-    tabsList.forEach((tab) => {
-      tab.classList.remove("active");
+      tabsList.forEach((tab) => {
+        tab.classList.remove("active");
+      });
+      e.target.classList.add("active");
+
+      // Сохраняем выбранную категорию в localStorage
+      localStorage.setItem("selectedCategory", dataCategory);
+
+      // Отображаем карточки по выбранной категории
+      displayCards(dataCategory);
     });
-    e.target.classList.add("active");
-
-    // Сохраняем выбранную категорию в localStorage
-    localStorage.setItem("selectedCategory", dataCategory);
-
-    // Отображаем карточки по выбранной категории
-    displayCards(dataCategory);
   });
-});
 
-// Получаем сохраненную категорию при загрузке страницы
-const savedCategory = localStorage.getItem("selectedCategory") || "all";
+  // Получаем сохраненную категорию при загрузке страницы
+  const savedCategory = localStorage.getItem("selectedCategory") || "all";
 
-// Устанавливаем активную вкладку и отображаем карточки
-tabsList.forEach((tab) => {
-  if (tab.getAttribute("data-category") === savedCategory) {
-    tab.classList.add("active");
-  }
-});
-displayCards(savedCategory);
+  // Устанавливаем активную вкладку и отображаем карточки
+  tabsList.forEach((tab) => {
+    if (tab.getAttribute("data-category") === savedCategory) {
+      tab.classList.add("active");
+    }
+  });
+  displayCards(savedCategory);
+}
 
 // ================
+// Проверяем, существуют ли слайды
 let currentSlideIndex = 0;
 const slides = document.querySelectorAll('.slide');
 const totalSlides = slides.length;
 
-document.getElementById('total-slides').textContent = totalSlides;
+if (totalSlides > 0) {
+  document.getElementById('total-slides').textContent = totalSlides;
 
-function showSlide(index) {
+  function showSlide(index) {
     slides.forEach(slide => slide.classList.remove('active'));
     slides[index].classList.add('active');
     document.getElementById('current-slide').textContent = index + 1;
-}
+  }
 
-function nextSlide() {
+  function nextSlide() {
     currentSlideIndex = (currentSlideIndex + 1) % totalSlides;
     showSlide(currentSlideIndex);
-}
+  }
 
-function prevSlide() {
+  function prevSlide() {
     currentSlideIndex = (currentSlideIndex - 1 + totalSlides) % totalSlides;
     showSlide(currentSlideIndex);
+  }
 }
