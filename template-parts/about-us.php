@@ -99,8 +99,7 @@ get_header();
                                 <div class="col-12 col-md-6 col-xl-4 my-2">
                                     <div class="item">
                                         <?php if ($image): ?>
-                                            <img src="<?php echo esc_url($image); ?>"
-                                                alt="<?php echo esc_attr($image); ?>" />
+                                            <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($image); ?>" />
                                         <?php endif; ?>
                                         <?php if ($title): ?>
                                             <h3 class="card-header-title"><?php echo esc_html($title); ?></h3>

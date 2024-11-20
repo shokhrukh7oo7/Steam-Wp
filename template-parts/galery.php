@@ -10,53 +10,32 @@ get_header();
         <div class="container">
             <div class="galery-container">
                 <div class="galery-header-wrapper">
-                    <h1 class="galery-header-title">Галерея</h1>
+                    <h1 class="galery-header-title">
+                        <?php the_field('galery_header_title') ?>
+                    </h1>
                 </div>
 
                 <div class="galery-image-wrapper">
-                    <div class="row">
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-5 my-3">
-                            <div class="g-img">
-                                <img src="/assets/images/gallery/g1.png" alt="image">
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-7 col-lg-3 my-3">
-                            <div class="g-img">
-                                <img src="/assets/images/gallery/g2.png" alt="image">
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-5 col-lg-4 my-3">
-                            <div class="g-img">
-                                <img src="/assets/images/gallery/g3.jpg" alt="image">
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-5 my-3">
-                            <div class="g-img-bottom">
-                                <img src="/assets/images/gallery/g4.png" alt="image">
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-7 col-lg-3 my-3">
-                            <div class="g-img-bottom">
-                                <img src="/assets/images/gallery/g5.png" alt="image">
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-md-5 col-lg-4 my-3">
-                            <div class="g-img-bottom">
-                                <img src="/assets/images/gallery/g6.png" alt="image">
-                            </div>
-                        </div>
+                    <div class="galery_box">
+                        <?php if (have_rows('gallery_images')): ?>
+                            <?php while (have_rows('gallery_images')):
+                                the_row();
+                                $image = get_sub_field('image');
+                                ?>
+                                <div class="galery_item">
+                                    <?php if ($image): ?>
+                                        <img src="<?php echo esc_url($image); ?>" alt="<?php echo esc_attr($image); ?>">
+                                    <?php endif; ?>
+                                </div>
+                            <?php endwhile; ?>
+                        <?php endif; ?>
                     </div>
 
                     <div class="galery-video-container">
-                        <video src="/assets/images/services/saun.mp4"
-                            alt="A cozy wooden sauna with warm lighting and a stone heater." controls=""></video>
+                        <video controls>
+                            <source src="<?php the_field('video_file') ?>" type="video/mp4">
+                        </video>
                         <div class="play-button" onclick="togglePlay()">
-                            <!-- <video controls>
-                    <source src="/assets/images/services/saun.mp4" type="video/mp4" />
-                    <source src="video.webm" type="video/webm" />
-                    Ваш браузер не поддерживает тег видео.
-                  </video>-->
                         </div>
                     </div>
                 </div>
