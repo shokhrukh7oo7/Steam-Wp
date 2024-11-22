@@ -32,27 +32,32 @@
 				<div class="container">
 					<div class="navbar-top-wrapper-container">
 						<div class="navbar-top-social-links-wrapper">
-							<a href="#" class="order-call-btn" id="order-call-btn">Заказать звонок</a>
+							<a href="#" class="order-call-btn" id="order-call-btn">
+								<?php the_field('order_call_text') ?>
+							</a>
+
 							<div class="social-box">
-								<a href="#">
-									<img src="<?php echo get_template_directory_uri() ?>/assets/images/header/viber.svg"
-										alt="image" />
-								</a>
-								<a href="#">
-									<img src="<?php echo get_template_directory_uri() ?>/assets/images/header/whatsapp.svg"
-										alt="image" />
-								</a>
-								<a href="#">
-									<img src="<?php echo get_template_directory_uri() ?>/assets/images/header/telegram.svg"
-										alt="image" />
-								</a>
+								<?php if (have_rows('social_links')): ?>
+									<?php while (have_rows('social_links')):
+										the_row();
+										$url = get_sub_field('link_url');
+										$icon = get_sub_field('link_image');
+										$icon_url = is_array($icon) ? $icon['url'] : ''; // Получаем URL изображения
+										?>
+										<a href="<?php echo esc_url($url); ?>" target="_blank">
+											<?php if ($icon_url): ?>
+												<img src="<?php echo esc_url($icon_url); ?>" alt="Social Link" />
+											<?php endif; ?>
+										</a>
+									<?php endwhile; ?>
+								<?php endif; ?>
 							</div>
 						</div>
 
 						<div class="navbar-top-call-wrapper">
-							<a href="#">+998 (50) 074 20 00
-								<img src="<?php echo get_template_directory_uri() ?>/assets/images/header/call.svg"
-									alt="image" />
+							<a href="tel: <?php the_field('phone_number') ?>">
+								<?php the_field('phone_number') ?>
+								<img src="<?php the_field('phone_image') ?>" alt="image" />
 							</a>
 						</div>
 					</div>
