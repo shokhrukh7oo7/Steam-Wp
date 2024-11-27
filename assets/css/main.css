@@ -960,6 +960,7 @@ swiper-slide img {
 .request-modal .request-modal-body {
   display: flex;
   justify-content: normal;
+  gap: 20px;
 }
 .request-modal .request-modal-body .requset-modal-left {
   display: flex;

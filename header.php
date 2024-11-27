@@ -42,12 +42,9 @@
 										the_row();
 										$url = get_sub_field('link_url');
 										$icon = get_sub_field('link_image');
-										$icon_url = is_array($icon) ? $icon['url'] : ''; // Получаем URL изображения
 										?>
 										<a href="<?php echo esc_url($url); ?>" target="_blank">
-											<?php if ($icon_url): ?>
-												<img src="<?php echo esc_url($icon_url); ?>" alt="Social Link" />
-											<?php endif; ?>
+											<img src="<?php echo esc_html($icon); ?>" alt="Social Link" />
 										</a>
 									<?php endwhile; ?>
 								<?php endif; ?>
@@ -115,7 +112,9 @@
 	<!-- ----- request modal start ----- -->
 	<div class="request-modal hidden" id="request-modal">
 		<div class="request-modal-header">
-			<h1 class="request-modal-header-title">ОСТАВЬТЕ ВАШИ КОНТАКТЫ</h1>
+			<h1 class="request-modal-header-title">
+				<?php the_field('request_header') ?>
+			</h1>
 			<button class="btn close-btn" id="close-btn">
 				<i class="fas fa-close"></i>
 			</button>
@@ -123,7 +122,7 @@
 		<div class="request-modal-body">
 			<div class="requset-modal-left">
 				<p class="requset-modal-description">
-					Мы свяжимся с вами и рассчитаем стоимость проекта
+					<?php the_field('request_description_under_header') ?>
 				</p>
 
 				<form>
@@ -132,21 +131,20 @@
 					<input type="tel" class="form-control request-modal-input" placeholder="+998(__) ___-__-__"
 						required />
 					<button class="btn request-modal-btn" id="request-modal-btn">
-						Оставить заявку
+						<?php the_field('request_btn_title') ?>
 					</button>
 				</form>
 
 				<div class="request-modal-checkbox-wrapper">
 					<input type="checkbox" class="request-checkbox" />
 					<p class="request-modal-checkbox-title">
-						Нажимая на кнопку, вы соглашаетесь на обработку персональных
-						данных и <a href="#">политикой конфиденциальности</a>
+						<?php the_field('request_privacy_policy_title') ?>
+						<a href="#"><?php the_field('request_privacy_policy_title_color') ?></a>
 					</p>
 				</div>
 			</div>
 			<div class="requset-modal-right">
-				<img src="<?php echo get_template_directory_uri() ?>/assets/images/modal/request-modal.png"
-					alt="image" />
+				<img src="<?php the_field('request_image') ?>" alt="image" />
 				<div class="around-image"></div>
 			</div>
 		</div>
@@ -157,7 +155,7 @@
 	<div class="order-call-modal hidden" id="order-call-modal">
 		<div class="order-call-modal-header">
 			<h1 class="order-call-modal-header-title">
-				МЕНЕДЖЕР ПОЗВОНИТ ВАМ В ТЕЧЕНИИ 5 МИНУТ
+				<?php the_field('order_header')?>
 			</h1>
 			<button class="btn close-btn" id="order-close-btn">
 				<i class="fas fa-close"></i>
@@ -166,28 +164,27 @@
 		<div class="order-call-modal-body">
 			<div class="order-call-modal-left">
 				<p class="order-call-modal-description">
-					ответит на все вопросы и прокосультирует по продуктам Steam
+					<?php the_field('order_description_title')?>
 				</p>
 
 				<form>
 					<input type="tel" class="form-control order-call-modal-input" placeholder="+998(__) ___-__-__"
 						required />
 					<button class="btn order-call-modal-btn" id="order-call-modal-btn">
-						Позвоните мне
+						<?php the_field('order_btn_title')?>
 					</button>
 				</form>
 
 				<div class="order-call-modal-checkbox-wrapper">
 					<input type="checkbox" class="order-call-checkbox" />
 					<p class="order-call-modal-checkbox-title">
-						Нажимая на кнопку, вы соглашаетесь на обработку персональных
-						данных и <a href="#">политикой конфиденциальности</a>
+						<?php the_field('order_privacy_policy_title')?>
+						 <a href="#"><?php the_field('order_privacy_policy_title_color')?></a>
 					</p>
 				</div>
 			</div>
 			<div class="order-call-modal-right">
-				<img src="<?php echo get_template_directory_uri() ?>/assets/images/modal/request-modal.png"
-					alt="image" />
+				<img src="<?php the_field('order_image')?>" alt="image" />
 				<div class="around-image"></div>
 			</div>
 		</div>

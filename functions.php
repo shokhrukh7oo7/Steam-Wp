@@ -219,7 +219,8 @@ if (defined('JETPACK__VERSION')) {
 // Каталог товаров steam (панель управление)
 function create_catalog_post_type()
 {
-	register_post_type('catalog_steam',
+	register_post_type(
+		'catalog_steam',
 		array(
 			'labels' => array(
 				'name' => __('Каталог Steam'),
@@ -235,14 +236,87 @@ function create_catalog_post_type()
 add_action('init', 'create_catalog_post_type');
 
 // ====================================================================================
-// Аксессуары (панель управление)
-function create_accessories_post_type()
+
+// ====================================================================================
+// Category (tabs)
+function register_post_types()
 {
-	register_post_type('accessories',
+	register_post_type('portfolio', [
+		'label' => null,
+		'labels' => [
+			'name' => 'Категория',
+			'singular_name' => 'Категория',
+			'add_new' => 'Добавить категорию',
+			'add_new_item' => 'Добавление категории',
+			'edit_item' => 'Редактирование категории',
+			'new_item' => 'Новая категория',
+			'view_item' => 'Смотреть категорию',
+			'search_items' => 'Искать категорию',
+			'not_found' => 'Не найдено',
+			'not_found_in_trash' => 'Не найдено в корзине',
+			'parent_item_colon' => '',
+			'menu_name' => 'Категория',
+		],
+		'public' => true,
+		'hierarchical' => false,
+		'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
+		'taxonomies' => ['portfolio_category'], // Добавление таксономии
+		'has_archive' => false,
+	]);
+
+}
+add_action('init', 'register_post_types');
+
+
+// Убедитесь, что таксономия 'category' зарегистрирована для кастомного типа записи// Регистрация новой таксономии
+function register_portfolio_taxonomy()
+{
+	$labels = array(
+		'name' => 'Категория',
+		'singular_name' => 'Категория',
+		'search_items' => 'Search Portfolio Categories',
+		'all_items' => 'All Portfolio Categories',
+		'parent_item' => 'Parent Portfolio Category',
+		'parent_item_colon' => 'Parent Portfolio Category:',
+		'edit_item' => 'Edit Portfolio Category',
+		'update_item' => 'Update Portfolio Category',
+		'add_new_item' => 'Add New Portfolio Category',
+		'new_item_name' => 'New Portfolio Category Name',
+		'menu_name' => 'Категория',
+	);
+
+	$args = array(
+		'hierarchical' => true,
+		'labels' => $labels,
+		'show_ui' => true,
+		'show_admin_column' => true,
+		'query_var' => true,
+		'rewrite' => array('slug' => 'add-category'),
+	);
+
+	register_taxonomy('portfolio_category', array('portfolio'), $args);
+}
+add_action('init', 'register_portfolio_taxonomy');
+// ====================================================================================
+// Аксессуары (панель управление)
+function create_products_post_type()
+{
+	register_post_type(
+		'products',
 		array(
 			'labels' => array(
-				'name' => __('Аксессуары'),
-				'singular_name' => __('Аксессуары')
+				'name' => __('Товары'),
+				'singular_name' => __('Товары'),
+				'add_new' => 'Добавить Товаров',
+				'add_new_item' => 'Добавление Товаров',
+				'edit_item' => 'Редактирование Товаров',
+				'new_item' => 'Новые Товары',
+				'view_item' => 'Смотреть Товары',
+				'search_items' => 'Искать Товары',
+				'not_found' => 'Не найдено',
+				'not_found_in_trash' => 'Не найдено в корзине',
+				'parent_item_colon' => '',
+				'menu_name' => 'Товары',
 			),
 			'public' => true,
 			'has_archive' => true,
@@ -250,8 +324,31 @@ function create_accessories_post_type()
 			'menu_icon' => 'dashicons-admin-customizer',
 		)
 	);
+
+	// Регистрируем таксономию для рубрик
+	register_taxonomy('products_category', 'products', array(
+		'labels' => array(
+			'name' => __('Рубрики товаров'),
+			'singular_name' => __('Рубрика товара'),
+			'search_items' => __('Искать рубрики'),
+			'all_items' => __('Все рубрики'),
+			'parent_item' => __('Родительская рубрика'),
+			'parent_item_colon' => __('Родительская рубрика:'),
+			'edit_item' => __('Редактировать рубрику'),
+			'update_item' => __('Обновить рубрику'),
+			'add_new_item' => __('Добавить новую рубрику'),
+			'new_item_name' => __('Название новой рубрики'),
+			'menu_name' => __('Рубрики'),
+		),
+		'hierarchical' => true, // Делает таксономию древовидной, как категории
+		'show_ui' => true,
+		'show_admin_column' => true,
+		'query_var' => true,
+		'rewrite' => array('slug' => 'products-category'),
+	));
 }
-add_action('init', 'create_accessories_post_type');
+add_action('init', 'create_products_post_type');
+
 // ====================================================================================
 // добавим класс nav-item ко всем пунктам меню
 add_filter('nav_menu_css_class', 'custom_nav_menu_css_class', 10, 1);
