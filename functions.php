@@ -51,9 +51,18 @@ function steam_setup()
 	register_nav_menus(
 		array(
 			'header' => esc_html__('Header Menu', 'steam'),
-			'footer' => esc_html__('Footer Menu', 'steam'),
+			'footer_left' => esc_html__('Footer Left Menu', 'steam'),
+			'footer_right' => esc_html__('Footer Right Menu', 'steam'),
 		)
 	);
+	add_filter('wp_nav_menu_args', 'customize_nav_menu_args');
+	function customize_nav_menu_args($args)
+	{
+		if ($args['theme_location'] === 'footer_left') {
+			$args['container'] = false;
+		}
+		return $args;
+	}
 
 	/*
 	 * Switch default core markup for search form, comment form, and comments
@@ -135,8 +144,62 @@ function steam_widgets_init()
 			'after_title' => '</h2>',
 		)
 	);
+	register_sidebar(
+		array(
+			'name' => esc_html__('Контакты в подвале', 'steam'),
+			'id' => 'sidebar-footer-contacts',
+			'description' => esc_html__('Вставле доступные виджеты сюда.', 'steam'),
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget' => '</div>',
+			'before_title' => '<h2">',
+			'after_title' => '</h2>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name' => esc_html__('Контакты в подвале сервис-центр', 'steam'),
+			'id' => 'sidebar-footer-contacts-2',
+			'description' => esc_html__('Вставле доступные виджеты сюда.', 'steam'),
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget' => '</div>',
+			'before_title' => '<h2">',
+			'after_title' => '</h2>',
+		)
+	);
+	register_sidebar(
+		array(
+			'name' => esc_html__('Заказ звонка', 'steam'),
+			'id' => 'sidebar-footer-order-call',
+			'description' => esc_html__('Вставле доступные виджеты сюда.', 'steam'),
+			'before_widget' => '<div id="%1$s" class="widget %2$s">',
+			'after_widget' => '</div>',
+		)
+	);
 }
 add_action('widgets_init', 'steam_widgets_init');
+// ====================================================================================
+// Options footer start
+if (function_exists('acf_add_options_page')) {
+	acf_add_options_page(array(
+		'page_title' => 'Настройки футера',
+		'menu_title' => 'Настройки футера',
+		'menu_slug' => 'footer-settings',
+		'capability' => 'edit_posts',
+		'redirect' => false
+	));
+}
+// Options footer end
+// ====================================================================================
+// Добавил в виджет тект и спомощью этого функии добавили класс.
+function add_class_to_widget_title($title, $instance, $id_base)
+{
+	// Проверяем, что это нужный виджет (по ID или названию)
+	if ($id_base === 'text' && strpos($title, 'Контакты') !== false) {
+		$title = '<h3 class="footer-middle-header">' . $title . '</h3>';
+	}
+	return $title;
+}
+add_filter('widget_title', 'add_class_to_widget_title', 10, 3);
 
 /**
  * Enqueue scripts and styles.
@@ -344,11 +407,61 @@ function create_products_post_type()
 		'show_ui' => true,
 		'show_admin_column' => true,
 		'query_var' => true,
-		'rewrite' => array('slug' => 'products-category'),
+		'rewrite' => array('slug' => 'products-category', 'with_front' => false, ),
+	));
+	// Регистрируем таксономию для рубрик
+	register_taxonomy('product_tags', 'products', array(
+		'labels' => array(
+			'name' => __('Теги товаров'),
+			'singular_name' => __('Теги товара'),
+			'search_items' => __('Искать Теги'),
+			'all_items' => __('Все Теги'),
+			'parent_item' => __('Родительская Теги'),
+			'parent_item_colon' => __('Родительская Теги:'),
+			'edit_item' => __('Редактировать Теги'),
+			'update_item' => __('Обновить Теги'),
+			'add_new_item' => __('Добавить новую Теги'),
+			'new_item_name' => __('Название новой Теги'),
+			'menu_name' => __('Теги'),
+		),
+		'hierarchical' => false, // Делает таксономию древовидной, как категории
+		'show_ui' => true,
+		'show_admin_column' => true,
+		'query_var' => true,
+		'rewrite' => array('slug' => 'product-tags'),
+	));
+	// Регистрируем таксономию для рубрик
+	register_taxonomy('product_accessories', 'products', array(
+		'labels' => array(
+			'name' => __('Аксессуар товаров'),
+			'singular_name' => __('Аксессуар товара'),
+			'search_items' => __('Искать Аксессуар'),
+			'all_items' => __('Все Аксессуар'),
+			'parent_item' => __('Родительская Аксессуар'),
+			'parent_item_colon' => __('Родительская Аксессуар:'),
+			'edit_item' => __('Редактировать Аксессуар'),
+			'update_item' => __('Обновить Аксессуар'),
+			'add_new_item' => __('Добавить новую Аксессуар'),
+			'new_item_name' => __('Название новой Аксессуар'),
+			'menu_name' => __('Аксессуар'),
+		),
+		'hierarchical' => false, // Делает таксономию древовидной, как категории
+		'show_ui' => true,
+		'show_admin_column' => true,
+		'query_var' => true,
+		'rewrite' => array('slug' => 'product-accessories'),
 	));
 }
 add_action('init', 'create_products_post_type');
 
+// ====================================================================================
+add_filter('nav_menu_css_class', 'custom_footer_menu_css_class', 10, 1);
+
+function custom_footer_menu_css_class($classes)
+{
+	$classes[] = 'link';
+	return $classes;
+}
 // ====================================================================================
 // добавим класс nav-item ко всем пунктам меню
 add_filter('nav_menu_css_class', 'custom_nav_menu_css_class', 10, 1);

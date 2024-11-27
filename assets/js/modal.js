@@ -6,6 +6,7 @@ const closeRequestBtn = document.getElementById("close-btn");
 const showOrderCallBtn = document.getElementById("order-call-btn");
 const orderModal = document.getElementById("order-call-modal");
 const closeOrderBtn = document.getElementById("order-close-btn");
+const footerBtn = document.getElementById("footer-middle-btn");
 const overlay = document.getElementById("overlay");
 
 const serviceBtn = document.getElementById("service-leave-request-btn");
@@ -26,6 +27,8 @@ if (serviceBtn) {
 
 showOrderCallBtn.addEventListener("click", () => toggleModal(orderModal, true));
 closeOrderBtn.addEventListener("click", () => toggleModal(orderModal, false));
+
+footerBtn.addEventListener("click", () => toggleModal(orderModal, true));
 
 // Hide modals when overlay is clicked
 overlay.addEventListener("click", () => {
@@ -55,7 +58,7 @@ function togglePlay() {
   }
 }
 
-if(video){
+if (video) {
   video.addEventListener("play", () => {
     playButton.style.display = "none";
   });
@@ -63,4 +66,3 @@ if(video){
     playButton.style.display = "flex";
   });
 }
-

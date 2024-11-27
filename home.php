@@ -7,62 +7,45 @@ get_header();
 
 <!-- MAIN START -->
 <main>
-    <!-- BANNER SLIDER START -->
+    <!-- BANNER SLIDER START (✅)-->
     <?php
     $banner_image = get_field('banner_bg'); // Получаем URL изображения
     ?>
     <section id="banner-swiper" style="--banner-image: url('<?php echo esc_url($banner_image); ?>');">
         <div class="container">
             <div class="slider">
-                <div class="slide active">
-                    <div class="text-content">
-                        <p>Создаем арт объекты для парения и отдыха</p>
-                        <h1>ЭКСКЛЮЗИВНАЯ ОТДЕЛКА БАНЬ, САУН, ХАММАМОВ "ПОД КЛЮЧ"</h1>
-                        <a class="button" href="#">Подробнее о строительстве</a>
-                        <div class="pagination">
-                            <i class="fas fa-chevron-left" onclick="prevSlide()"></i>
-                            <span id="current-slide">1</span>
-                            <span>—</span>
-                            <span id="total-slides">2</span>
-                            <i class="fas fa-chevron-right" onclick="nextSlide()"></i>
+                <?php if (have_rows('slider')): ?>
+                    <?php $slide_index = 1;
+                    $total_slides = count(get_field('slider')); ?>
+                    <?php while (have_rows('slider')):
+                        the_row(); ?>
+                        <div class="slide <?php echo $slide_index === 1 ? 'active' : ''; ?>">
+                            <div class="text-content">
+                                <p><?php the_sub_field('slide_text'); ?></p>
+                                <h1><?php the_sub_field('slide_heading'); ?></h1>
+                                <a class="button" href="<?php the_field('button_link'); ?>">
+                                    <?php the_field('button_text'); ?>
+                                </a>
+                                <div class="pagination">
+                                    <i class="fas fa-chevron-left" onclick="prevSlide()"></i>
+                                    <span id="current-slide"><?php echo $slide_index; ?></span>
+                                    <span>—</span>
+                                    <span id="total-slides"><?php echo $total_slides; ?></span>
+                                    <i class="fas fa-chevron-right" onclick="nextSlide()"></i>
+                                </div>
+                            </div>
+                            <div class="image-content">
+                                <img src="<?php echo get_sub_field('slide_image') ?>"
+                                    alt="<?php echo get_sub_field('slide_image') ?>">
+                            </div>
                         </div>
-                    </div>
-                    <div class="image-content">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/swiper/s-1.png"
-                            alt="image">
-                        <!-- <div class="quality-guarantee">
-                        <span>⚡ Индивидуальный подход</span>
-                        <span class="badge">ГАРАНТИЯ КАЧЕСТВА</span>
-                    </div> -->
-                    </div>
-                </div>
-
-                <div class="slide">
-                    <div class="text-content">
-                        <p>Создаем арт объекты для парения и отдыха</p>
-                        <h1>ПРОВОДИМ ДИАГНОСТИКУ И ОБСЛУЖИВАЕМ ЛЮБУЮ НЕИСПРАВНОСТЬ САУНЫ</h1>
-                        <a class="button" href="#">Подробнее о строительстве</a>
-                        <div class="pagination">
-                            <i class="fas fa-chevron-left" onclick="prevSlide()"></i>
-                            <span id="current-slide">2</span>
-                            <span>—</span>
-                            <span id="total-slides">2</span>
-                            <i class="fas fa-chevron-right" onclick="nextSlide()"></i>
-                        </div>
-                    </div>
-                    <div class="image-content">
-                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/catalog/materials.png"
-                            alt="image">
-                        <!-- <div class="quality-guarantee">
-                        <span>⚡ Индивидуальный подход</span>
-                        <span class="badge">ГАРАНТИЯ КАЧЕСТВА</span>
-                    </div> -->
-                    </div>
-                </div>
+                        <?php $slide_index++; ?>
+                    <?php endwhile; ?>
+                <?php endif; ?>
             </div>
         </div>
     </section>
-    <!-- BANNER SLIDER END -->
+    <!-- BANNER SLIDER END (✅)-->
 
     <!-- CATEGORY PRODUCT START -->
     <section id="category-product">
@@ -75,21 +58,26 @@ get_header();
                 <!-- tab links start -->
                 <div class="ap-tab">
                     <ul class="ap-tab-list">
-                        <li class="ap-tab-item active" data-category="sauna-stoves">
-                            Печи для саун
-                        </li>
-                        <li class="ap-tab-item" data-category="stones-for-steam-room">
-                            Камни для парных
-                        </li>
-                        <li class="ap-tab-item" data-category="lightting-and-decor">
-                            Освещение и декор
-                        </li>
-                        <li class="ap-tab-item" data-category="bath-accessories">
-                            Аксессуары для бани
-                        </li>
-                        <li class="ap-tab-item" data-category="finishing-materials">
-                            Материалы для отделки
-                        </li>
+                        <?php
+                        // $taxonomy = get_taxonomy("products_category");
+                        $args = [
+                            'taxonomy' => ['products_category'], // название таксономии с WP 4.5
+                            'orderby' => 'id',
+                            'order' => 'ASC',
+                            'hide_empty' => false,
+                        ];
+                        $terms = get_terms($args);
+
+                        foreach ($terms as $term) {
+                            ?>
+                            <li class="ap-tab-item active" data-category="products_category_<?= $term->term_id; ?>">
+                                <?php
+                                echo $term->name;
+                                ?>
+                            </li>
+                        <?
+                        }
+                        ?>
                     </ul>
                 </div>
                 <!-- tab links end -->
@@ -97,349 +85,64 @@ get_header();
                 <!-- tab description start -->
                 <div class="ap-tab-content">
                     <div class="row ap-tab-row">
-                        <!-- sauna-stoves -->
-                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div class="card" data-category="sauna-stoves">
-                                <swiper-container class="mySwiper" navigation="true">
-                                    <swiper-slide>
-                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-1.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide>
-                                        <img src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-1.png"
-                                            alt="images" />
-                                    </swiper-slide>
-                                </swiper-container>
-                                <h4>Печи для саун</h4>
-                                <p class="sale">3 990 000 UZS</p>
-                                <p class="product-summ">2 990 000 UZS</p>
-                                <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
-                                    Смотреть товары
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div class="card" data-category="sauna-stoves">
-                                <swiper-container class="mySwiper" navigation="true">
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-2.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-2.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-2.png"
-                                            alt="images" /></swiper-slide>
-                                </swiper-container>
-                                <h4>Печи для саун</h4>
-                                <p class="sale">3 990 000 UZS</p>
-                                <p class="product-summ">2 990 000 UZS</p>
-                                <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
-                                    Смотреть товары
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div class="card" data-category="sauna-stoves">
-                                <swiper-container class="mySwiper" navigation="true">
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-3.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-3.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-3.png"
-                                            alt="images" /></swiper-slide>
-                                </swiper-container>
-                                <h4>Печи для саун</h4>
-                                <p class="sale">3 990 000 UZS</p>
-                                <p class="product-summ">2 990 000 UZS</p>
-                                <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
-                                    Смотреть товары
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div class="card" data-category="sauna-stoves">
-                                <swiper-container class="mySwiper" navigation="true">
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-4.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-4.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-4.png"
-                                            alt="images" /></swiper-slide>
-                                </swiper-container>
-                                <h4>Печи для саун</h4>
-                                <p class="sale">3 990 000 UZS</p>
-                                <p class="product-summ">2 990 000 UZS</p>
-                                <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
-                                    Смотреть товары
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div class="card" data-category="sauna-stoves">
-                                <swiper-container class="mySwiper" navigation="true">
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-5.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-5.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-5.png"
-                                            alt="images" /></swiper-slide>
-                                </swiper-container>
-                                <h4>Печи для саун</h4>
-                                <p class="sale">3 990 000 UZS</p>
-                                <p class="product-summ">2 990 000 UZS</p>
-                                <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
-                                    Смотреть товары
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div class="card" data-category="sauna-stoves">
-                                <swiper-container class="mySwiper" navigation="true">
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-6.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-6.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-6.png"
-                                            alt="images" /></swiper-slide>
-                                </swiper-container>
-                                <h4>Печи для саун</h4>
-                                <p class="sale">3 990 000 UZS</p>
-                                <p class="product-summ">2 990 000 UZS</p>
-                                <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
-                                    Смотреть товары
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div class="card" data-category="sauna-stoves">
-                                <swiper-container class="mySwiper" navigation="true">
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-7.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-7.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-7.png"
-                                            alt="images" /></swiper-slide>
-                                </swiper-container>
-                                <h4>Печи для саун</h4>
-                                <p class="sale">3 990 000 UZS</p>
-                                <p class="product-summ">2 990 000 UZS</p>
-                                <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
-                                    Смотреть товары
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div class="card" data-category="sauna-stoves">
-                                <swiper-container class="mySwiper" navigation="true">
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                </swiper-container>
-                                <h4>Печи для саун</h4>
-                                <p class="sale">3 990 000 UZS</p>
-                                <p class="product-summ">2 990 000 UZS</p>
-                                <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
-                                    Смотреть товары
-                                </a>
-                            </div>
-                        </div>
 
-                        <!-- stones for steam room -->
-                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div class="card" data-category="stones-for-steam-room">
-                                <swiper-container class="mySwiper" navigation="true">
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                </swiper-container>
-                                <h4>Печи для саун</h4>
-                                <p class="sale">3 990 000 UZS</p>
-                                <p class="product-summ">2 990 000 UZS</p>
-                                <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
-                                    Смотреть товары
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div class="card" data-category="stones-for-steam-room">
-                                <swiper-container class="mySwiper" navigation="true">
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                </swiper-container>
-                                <h4>Печи для саун</h4>
-                                <p class="sale">3 990 000 UZS</p>
-                                <p class="product-summ">2 990 000 UZS</p>
-                                <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
-                                    Смотреть товары
-                                </a>
-                            </div>
-                        </div>
+                        <?php
+                        global $post;
+                        foreach ($terms as $term) {
+                            $products = get_posts([
+                                'post_type' => 'products',
+                                'numberposts' => 8,
+                                'tax_query' => array(
+                                    array(
+                                        'taxonomy' => 'products_category',
+                                        'field' => 'id',
+                                        'terms' => array($term->term_id)
+                                    )
+                                ),
+                            ]);
+                            foreach ($products as $post) {
+                                setup_postdata($post);
+                                ?>
 
-                        <!-- lightting-and-decor -->
-                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div class="card" data-category="lightting-and-decor">
-                                <swiper-container class="mySwiper" navigation="true">
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                </swiper-container>
-                                <h4>Печи для саун</h4>
-                                <p class="sale">3 990 000 UZS</p>
-                                <p class="product-summ">2 990 000 UZS</p>
-                                <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
-                                    Смотреть товары
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div class="card" data-category="lightting-and-decor">
-                                <swiper-container class="mySwiper" navigation="true">
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                </swiper-container>
-                                <h4>Печи для саун</h4>
-                                <p class="sale">3 990 000 UZS</p>
-                                <p class="product-summ">2 990 000 UZS</p>
-                                <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
-                                    Смотреть товары
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div class="card" data-category="lightting-and-decor">
-                                <swiper-container class="mySwiper" navigation="true">
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-8.png"
-                                            alt="images" /></swiper-slide>
-                                </swiper-container>
-                                <h4>Печи для саун</h4>
-                                <p class="sale">3 990 000 UZS</p>
-                                <p class="product-summ">2 990 000 UZS</p>
-                                <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
-                                    Смотреть товары
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- bath-accessories -->
-                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div class="card" data-category="bath-accessories">
-                                <swiper-container class="mySwiper" navigation="true">
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-5.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-5.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-5.png"
-                                            alt="images" /></swiper-slide>
-                                </swiper-container>
-                                <h4>Печи для саун</h4>
-                                <p class="sale">3 990 000 UZS</p>
-                                <p class="product-summ">2 990 000 UZS</p>
-                                <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
-                                    Смотреть товары
-                                </a>
-                            </div>
-                        </div>
-
-                        <!-- finishing-materials -->
-                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div class="card" data-category="finishing-materials">
-                                <swiper-container class="mySwiper" navigation="true">
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-3.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-3.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-3.png"
-                                            alt="images" /></swiper-slide>
-                                </swiper-container>
-                                <h4>Печи для саун</h4>
-                                <p class="sale">3 990 000 UZS</p>
-                                <p class="product-summ">2 990 000 UZS</p>
-                                <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
-                                    Смотреть товары
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
-                            <div class="card" data-category="finishing-materials">
-                                <swiper-container class="mySwiper" navigation="true">
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-3.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-3.png"
-                                            alt="images" /></swiper-slide>
-                                    <swiper-slide><img
-                                            src="<?php echo get_template_directory_uri() ?>/assets/images/home/product-swiper/sauna-stoves-3.png"
-                                            alt="images" /></swiper-slide>
-                                </swiper-container>
-                                <h4>Печи для саун</h4>
-                                <p class="sale">3 990 000 UZS</p>
-                                <p class="product-summ">2 990 000 UZS</p>
-                                <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
-                                    Смотреть товары
-                                </a>
-                            </div>
-                        </div>
+                                <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-2">
+                                    <div class="card" data-category="products_category_<?= $term->term_id; ?>">
+                                        <?php
+                                        // echo get_term_link($term->term_id);
+                                        if (has_term('hit', 'product_tags', $post->ID)) {
+                                            ?>
+                                            <p class="red-tag">ХИТ</p>
+                                        <?
+                                        } elseif (has_term('new', 'product_tags', $post->ID)) {
+                                            ?>
+                                            <p class="green-tag">Новинка</p>
+                                        <?
+                                        } ?>
+                                        <swiper-container class="mySwiper" navigation="true">
+                                            <?php if (have_rows('gallery')): // Проверяем, есть ли записи в повторителе ?>
+                                                <?php while (have_rows('gallery')):
+                                                    the_row(); // Перебираем записи повторителя ?>
+                                                    <?php $photo = get_sub_field('photo'); // Получаем поле photo из повторителя ?>
+                                                    <?php if ($photo): // Проверяем, что поле photo заполнено ?>
+                                                        <swiper-slide>
+                                                            <img src="<?php echo esc_url($photo); ?>" alt="image">
+                                                        </swiper-slide>
+                                                    <?php endif; ?>
+                                                <?php endwhile; ?>
+                                            <?php endif; ?>
+                                        </swiper-container>
+                                        <h4><?php the_title(); ?></h4>
+                                        <p class="sale"><?php the_field('price') ?></p>
+                                        <p class="product-summ"><?php the_field('sale_price') ?></p>
+                                        <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
+                                            <?php the_field('btn_text') ?>
+                                        </a>
+                                    </div>
+                                </div>
+                                <?php
+                            }
+                            wp_reset_postdata();
+                        }
+                        ?>
                     </div>
                 </div>
                 <!-- tab description end -->
@@ -562,6 +265,7 @@ get_header();
                                 <p class="switcher-bottom-summ">2 990 000 UZS</p>
                             </div>
                         </div>
+
                         <div class="col-12 col-xl-7 my-2 slider-right-content">
                             <h3 class="slider-right-content-header">Баня гормония</h3>
                             <div class="right-content-wrapper">
@@ -621,6 +325,7 @@ get_header();
                                 <p class="switcher-bottom-summ">2 990 000 UZS</p>
                             </div>
                         </div>
+
                         <div class="col-12 col-xl-7 my-2 slider-right-content">
                             <h3 class="slider-right-content-header">Баня гормония</h3>
                             <div class="right-content-wrapper">
@@ -680,6 +385,7 @@ get_header();
                                 <p class="switcher-bottom-summ">2 990 000 UZS</p>
                             </div>
                         </div>
+
                         <div class="col-12 col-xl-7 my-2 slider-right-content">
                             <h3 class="slider-right-content-header">Баня гормония</h3>
                             <div class="right-content-wrapper">

@@ -1,3 +1,6 @@
+.page {
+  margin: 0;
+}
 /* HEADER CSS START */
 /* ========= navbar top wrapper start ========== */
 .navbar-wrapper .navbar-top-wrapper {
@@ -202,7 +205,7 @@
 /* General styles */
 #banner-swiper {
   position: relative;
-  height: clamp(400px, 150vw, 700px);
+  height: clamp(400px, 150vw, 700px) !important;
   overflow: hidden;
 }
 
@@ -245,6 +248,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 10px;
   padding: 50px;
 }
 #banner-swiper .text-content h1 {
@@ -254,12 +258,16 @@
   width: 100%;
   max-width: 500px;
   margin: 0;
+  height: 120px;
 }
 #banner-swiper .text-content p {
   color: var(--white);
   font-weight: 400;
   font-size: clamp(15px, 1.5vw, 18px);
   margin: 10px 0;
+  width: 100%;
+  max-width: 450px;
+  height: 50px;
 }
 #banner-swiper .button {
   display: inline-block;
@@ -278,7 +286,8 @@
   border-radius: 50%;
   width: 100%;
   max-width: 500px;
-  height: auto;
+  height: 450px;
+  object-fit: cover;
 }
 #banner-swiper .pagination {
   display: flex;
@@ -315,6 +324,36 @@
   font-weight: 600;
   font-size: clamp(24px, 3vw, 35px);
   text-transform: uppercase;
+}
+.red-tag {
+  width: 100%;
+  max-width: 80px;
+  text-align: center;
+  padding: 5px 10px;
+  color: var(--white);
+  font-weight: 500;
+  border-radius: 8px;
+  font-size: clamp(14px, 1.5vw, 18px);
+  background-color: var(--red);
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
+}
+.green-tag {
+  width: 100%;
+  max-width: 120px;
+  text-align: center;
+  padding: 5px 10px;
+  color: var(--white);
+  font-weight: 500;
+  border-radius: 8px;
+  font-size: clamp(14px, 1.5vw, 18px);
+  background-color: var(--green);
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 100;
 }
 swiper-container {
   width: 100%;
@@ -1947,6 +1986,15 @@ swiper-slide img {
   margin-bottom: 1rem;
   font-size: clamp(16px, 2vw, 20px);
   color: var(--black);
+}
+.footer-middle-wrapper #text-3 .footer-middle-header {
+  color: transparent !important;
+}
+.footer-middle-wrapper #text-4 .widgettitle {
+  color: var(--purple);
+  font-weight: 400;
+  font-size: clamp(16px, 1.5vw, 18px);
+  padding: 0;
 }
 .footer-middle-wrapper .footer-middle-links {
   margin: 0;
