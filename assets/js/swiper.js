@@ -26,6 +26,9 @@ if (sliderElement) {
   });
 }
 
+
+
+
 // swiper nasted swiper js
 const sliderImages = document.querySelectorAll(".slider-image");
 

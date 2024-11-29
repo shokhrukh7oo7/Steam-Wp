@@ -14,11 +14,11 @@
         while ($accessories_query->have_posts()):
             $accessories_query->the_post();
 
-            $accessories_image = get_field('accessories_header_image'); // Заголовок продукта
-            $accessories_header_title = get_field('accessories_product_title'); // Описание продукта
-            $accessories_sale_title = get_field('accessories_sale_title'); // Скидка сумма
-            $accessories_summ = get_field('accessories_summ'); // Сумма продукта
-            $accessories_btn_link = get_field('accessories_btn_link'); // Ссылка на каталог
+            $accessories_image = get_field('accessories_header_image'); 
+            $accessories_header_title = get_field('accessories_product_title'); 
+            $accessories_sale_title = get_field('accessories_sale_title'); 
+            $accessories_summ = get_field('accessories_summ'); 
+            $accessories_btn_link = get_field('accessories_btn_link'); 
             ?>
 
             <div class="col-12 col-sm-6 col-lg-4 col-xl-3 my-3">

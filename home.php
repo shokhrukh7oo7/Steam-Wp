@@ -84,7 +84,7 @@ get_header();
 
                 <!-- tab description start -->
                 <div class="ap-tab-content">
-                    <div class="row ap-tab-row">
+                    <div class="ap-tab-row">
 
                         <?php
                         global $post;
@@ -117,22 +117,28 @@ get_header();
                                             <p class="green-tag">Новинка</p>
                                         <?
                                         } ?>
-                                        <swiper-container class="mySwiper" navigation="true">
-                                            <?php if (have_rows('gallery')): // Проверяем, есть ли записи в повторителе ?>
-                                                <?php while (have_rows('gallery')):
-                                                    the_row(); // Перебираем записи повторителя ?>
-                                                    <?php $photo = get_sub_field('photo'); // Получаем поле photo из повторителя ?>
-                                                    <?php if ($photo): // Проверяем, что поле photo заполнено ?>
-                                                        <swiper-slide>
-                                                            <img src="<?php echo esc_url($photo); ?>" alt="image">
-                                                        </swiper-slide>
-                                                    <?php endif; ?>
-                                                <?php endwhile; ?>
-                                            <?php endif; ?>
-                                        </swiper-container>
+                                        <div class="swiper mySwiper">
+                                            <div class="swiper-wrapper">
+                                                <?php if (have_rows('gallery')): // Проверяем, есть ли записи в повторителе ?>
+                                                    <?php while (have_rows('gallery')):
+                                                        the_row(); // Перебираем записи повторителя ?>
+                                                        <?php $photo = get_sub_field('photo'); // Получаем поле photo из повторителя ?>
+                                                        <?php if ($photo): // Проверяем, что поле photo заполнено ?>
+                                                            <div class="swiper-slide">
+                                                                <img src="<?php echo esc_url($photo); ?>" alt="image">
+                                                            </div>
+                                                        <?php endif; ?>
+                                                    <?php endwhile; ?>
+                                                <?php endif; ?>
+                                            </div>
+                                            <!-- Элементы управления -->
+                                            <div class="swiper-button-next"></div>
+                                            <div class="swiper-button-prev"></div>
+                                        </div>
+
                                         <h4><?php the_title(); ?></h4>
-                                        <p class="sale"><?php the_field('price') ?></p>
-                                        <p class="product-summ"><?php the_field('sale_price') ?></p>
+                                        <p class="sale"><?php the_field('price') ?> UZS</p>
+                                        <p class="product-summ"><?php the_field('sale_price') ?> UZS</p>
                                         <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
                                             <?php the_field('btn_text') ?>
                                         </a>
@@ -235,191 +241,67 @@ get_header();
     </section>
     <!-- ACCESSORIEST END (✅)-->
 
-    <!-- FOOTER SWIPER START -->
+    <!-- FOOTER SWIPER START  (✅) -->
     <section class="section slider-section">
         <div class="container slider-column">
             <h1 class="slider-section-header">Популярные товары</h1>
-            <div class="slider-inner" id="slider">
-                <div class="slider-image">
-                    <div class="row switcher">
-                        <div class="col-12 col-xl-5 my-2 slider-left-wrapper">
-                            <div class="switcher-top">
-                                <img src="https://cdn.pixabay.com/photo/2023/05/22/10/49/houses-8010401_1280.jpg"
-                                    width="100%" />
-                            </div>
-                            <div class="switcher-bottom">
-                                <img src="https://cdn.pixabay.com/photo/2023/05/22/10/49/houses-8010401_1280.jpg"
-                                    width="100%" data-id="1" class="slider_click" />
-                                <img src="https://cdn.pixabay.com/photo/2023/07/13/05/36/mountains-8123933_1280.jpg"
-                                    width="100%" data-id="2" class="slider_click" />
-                                <img src="https://cdn.pixabay.com/photo/2022/12/12/21/35/stream-7651969_1280.jpg"
-                                    width="100%" data-id="3" class="slider_click" />
-                                <img src="https://cdn.pixabay.com/photo/2022/10/24/20/22/muhlviertel-7544316_1280.jpg"
-                                    width="100%" />
-                                <img src="https://cdn.pixabay.com/photo/2024/02/21/14/14/mountains-8587802_1280.jpg"
-                                    width="100%" />
-                            </div>
+            <?php if (have_rows('slider_items')): ?>
+                <div class="slider-inner" id="slider">
+                    <?php while (have_rows('slider_items')):
+                        the_row(); ?>
+                        <div class="slider-image">
+                            <div class="row switcher">
+                                <div class="col-12 col-xl-5 my-2 slider-left-wrapper">
+                                    <div class="switcher-top">
+                                        <img src="<?php echo get_sub_field('top_image'); ?>"
+                                            alt="<?php echo get_sub_field('top_image'); ?>" width="100%" />
+                                    </div>
+                                    <div class="switcher-bottom">
+                                        <?php if (have_rows('bottom_images')): ?>
+                                            <?php while (have_rows('bottom_images')):
+                                                the_row(); ?>
+                                                <img src="<?php echo get_sub_field('image'); ?>"
+                                                    alt="<?php echo get_sub_field('image'); ?>" width="100%"
+                                                    data-id="<?php echo get_sub_field('data_id'); ?>" class="slider_click" />
+                                            <?php endwhile; ?>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="switcher-bottom-title">
+                                        <p class="switcher-bottom-sale"><?php the_sub_field('old_price'); ?> UZS</p>
+                                        <p class="switcher-bottom-summ"><?php the_sub_field('new_price'); ?> UZS</p>
+                                    </div>
+                                </div>
 
-                            <div class="switcher-bottom-title">
-                                <p class="switcher-bottom-sale">3 990 000 UZS</p>
-                                <p class="switcher-bottom-summ">2 990 000 UZS</p>
+                                <div class="col-12 col-xl-7 my-2 slider-right-content">
+                                    <h3 class="slider-right-content-header"><?php the_sub_field('title'); ?></h3>
+                                    <div class="right-content-wrapper">
+                                        <?php if (have_rows('features')): ?>
+                                            <?php while (have_rows('features')):
+                                                the_row(); ?>
+                                                <div class="right-content-info">
+                                                    <p class="right-content-left-title"><?php the_sub_field('feature_title'); ?></p>
+                                                    <p class="right-content-right-title"><?php the_sub_field('feature_description'); ?>
+                                                    </p>
+                                                </div>
+                                            <?php endwhile; ?>
+                                        <?php endif; ?>
+                                    </div>
+                                    <div class="materials-wrapper">
+                                        <h1 class="materials-header"><?php the_sub_field('materials_header') ?></h1>
+                                        <p class="materials-description"><?php the_sub_field('materials'); ?></p>
+                                    </div>
+                                    <div class="decor-elements-wrapper">
+                                        <h1 class="decor-elements-header"><?php the_sub_field('decor_elements_header') ?></h1>
+                                        <p class="decor-elements-description"><?php the_sub_field('decor_elements'); ?></p>
+                                    </div>
+                                    <a href="#" class="btn buy-btn" id="buy-btn"><?php the_sub_field('text_btn') ?></a>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="col-12 col-xl-7 my-2 slider-right-content">
-                            <h3 class="slider-right-content-header">Баня гормония</h3>
-                            <div class="right-content-wrapper">
-                                <div class="right-content-info">
-                                    <p class="right-content-left-title">Площадь:</p>
-                                    <p class="right-content-right-title">9,84 кВ м</p>
-                                </div>
-                                <div class="right-content-info">
-                                    <p class="right-content-left-title">Сроки</p>
-                                    <p class="right-content-right-title">9 дней</p>
-                                </div>
-                                <div class="right-content-info">
-                                    <p class="right-content-left-title">Печь</p>
-                                    <p class="right-content-right-title">Aito AK-68</p>
-                                </div>
-                            </div>
-                            <div class="materials-wrapper">
-                                <h1 class="materials-header">Материалы:</h1>
-                                <p class="materials-description">
-                                    Ольха, Натуральный камень талькомагнезит
-                                </p>
-                            </div>
-                            <div class="decor-elements-wrapper">
-                                <h1 class="decor-elements-header">Декоративные элементы</h1>
-                                <p class="decor-elements-description">
-                                    Светодиодная подсветка потолка и парильного слота,
-                                    талькомагнезит. Столярная вырезка, Краны для подачи воды.
-                                </p>
-                            </div>
-                            <a href="#" class="btn buy-btn" id="buy-btn">Купить</a>
-                        </div>
-                    </div>
+                    <?php endwhile; ?>
                 </div>
+            <?php endif; ?>
 
-                <div class="slider-image">
-                    <div class="row switcher">
-                        <div class="col-12 col-xl-5 my-2 slider-left-wrapper">
-                            <div class="switcher-top">
-                                <img src="https://cdn.pixabay.com/photo/2023/05/22/10/49/houses-8010401_1280.jpg"
-                                    width="100%" />
-                            </div>
-                            <div class="switcher-bottom">
-                                <img src="https://cdn.pixabay.com/photo/2023/05/22/10/49/houses-8010401_1280.jpg"
-                                    width="100%" />
-                                <img src="https://cdn.pixabay.com/photo/2023/07/13/05/36/mountains-8123933_1280.jpg"
-                                    width="100%" />
-                                <img src="https://cdn.pixabay.com/photo/2022/12/12/21/35/stream-7651969_1280.jpg"
-                                    width="100%" />
-                                <img src="https://cdn.pixabay.com/photo/2022/10/24/20/22/muhlviertel-7544316_1280.jpg"
-                                    width="100%" />
-                                <img src="https://cdn.pixabay.com/photo/2024/02/21/14/14/mountains-8587802_1280.jpg"
-                                    width="100%" />
-                            </div>
-
-                            <div class="switcher-bottom-title">
-                                <p class="switcher-bottom-sale">3 990 000 UZS</p>
-                                <p class="switcher-bottom-summ">2 990 000 UZS</p>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-xl-7 my-2 slider-right-content">
-                            <h3 class="slider-right-content-header">Баня гормония</h3>
-                            <div class="right-content-wrapper">
-                                <div class="right-content-info">
-                                    <p class="right-content-left-title">Площадь:</p>
-                                    <p class="right-content-right-title">9,84 кВ м</p>
-                                </div>
-                                <div class="right-content-info">
-                                    <p class="right-content-left-title">Сроки</p>
-                                    <p class="right-content-right-title">9 дней</p>
-                                </div>
-                                <div class="right-content-info">
-                                    <p class="right-content-left-title">Печь</p>
-                                    <p class="right-content-right-title">Aito AK-68</p>
-                                </div>
-                            </div>
-                            <div class="materials-wrapper">
-                                <h1 class="materials-header">Материалы:</h1>
-                                <p class="materials-description">
-                                    Ольха, Натуральный камень талькомагнезит
-                                </p>
-                            </div>
-                            <div class="decor-elements-wrapper">
-                                <h1 class="decor-elements-header">Декоративные элементы</h1>
-                                <p class="decor-elements-description">
-                                    Светодиодная подсветка потолка и парильного слота,
-                                    талькомагнезит. Столярная вырезка, Краны для подачи воды.
-                                </p>
-                            </div>
-                            <a href="#" class="btn buy-btn" id="buy-btn">Купить</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="slider-image">
-                    <div class="row switcher">
-                        <div class="col-12 col-xl-5 my-2 slider-left-wrapper">
-                            <div class="switcher-top">
-                                <img src="https://cdn.pixabay.com/photo/2023/05/22/10/49/houses-8010401_1280.jpg"
-                                    width="100%" />
-                            </div>
-                            <div class="switcher-bottom">
-                                <img src="https://cdn.pixabay.com/photo/2023/05/22/10/49/houses-8010401_1280.jpg"
-                                    width="100%" />
-                                <img src="https://cdn.pixabay.com/photo/2023/07/13/05/36/mountains-8123933_1280.jpg"
-                                    width="100%" />
-                                <img src="https://cdn.pixabay.com/photo/2022/12/12/21/35/stream-7651969_1280.jpg"
-                                    width="100%" />
-                                <img src="https://cdn.pixabay.com/photo/2022/10/24/20/22/muhlviertel-7544316_1280.jpg"
-                                    width="100%" />
-                                <img src="https://cdn.pixabay.com/photo/2024/02/21/14/14/mountains-8587802_1280.jpg"
-                                    width="100%" />
-                            </div>
-
-                            <div class="switcher-bottom-title">
-                                <p class="switcher-bottom-sale">3 990 000 UZS</p>
-                                <p class="switcher-bottom-summ">2 990 000 UZS</p>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-xl-7 my-2 slider-right-content">
-                            <h3 class="slider-right-content-header">Баня гормония</h3>
-                            <div class="right-content-wrapper">
-                                <div class="right-content-info">
-                                    <p class="right-content-left-title">Площадь:</p>
-                                    <p class="right-content-right-title">9,84 кВ м</p>
-                                </div>
-                                <div class="right-content-info">
-                                    <p class="right-content-left-title">Сроки</p>
-                                    <p class="right-content-right-title">9 дней</p>
-                                </div>
-                                <div class="right-content-info">
-                                    <p class="right-content-left-title">Печь</p>
-                                    <p class="right-content-right-title">Aito AK-68</p>
-                                </div>
-                            </div>
-                            <div class="materials-wrapper">
-                                <h1 class="materials-header">Материалы:</h1>
-                                <p class="materials-description">
-                                    Ольха, Натуральный камень талькомагнезит
-                                </p>
-                            </div>
-                            <div class="decor-elements-wrapper">
-                                <h1 class="decor-elements-header">Декоративные элементы</h1>
-                                <p class="decor-elements-description">
-                                    Светодиодная подсветка потолка и парильного слота,
-                                    талькомагнезит. Столярная вырезка, Краны для подачи воды.
-                                </p>
-                            </div>
-                            <a href="#" class="btn buy-btn" id="buy-btn">Купить</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <span role="tablist" class="pagination"></span>
             <span class="slider-prev"><i class="fa-solid fa-angle-left"></i></span>
             <span class="slider-next"><i class="fa-solid fa-angle-right"></i></span>

@@ -232,6 +232,7 @@ function steam_scripts()
 	wp_enqueue_style("font", "https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap");
 	wp_enqueue_style("font-awesome", "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css");
 	wp_enqueue_style("glider", "https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.css");
+	wp_enqueue_style("swiper", "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css", array(), null);
 	wp_enqueue_style("layout", get_template_directory_uri() . "/assets/css/layout.css");
 	wp_enqueue_style("main", get_template_directory_uri() . "/assets/css/main.css");
 	wp_enqueue_style("responsive", get_template_directory_uri() . "/assets/css/responsive.css");
@@ -239,12 +240,13 @@ function steam_scripts()
 
 	// CUSTOM JS
 	wp_enqueue_script("jquery", "https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js", array(), _S_VERSION, true);
-	wp_enqueue_script("main", get_template_directory_uri() . "/assets/js/main.js", array(), _S_VERSION, true);
 	wp_enqueue_script("glider", "https://cdn.jsdelivr.net/npm/glider-js@1/glider.min.js", array(), null, true);
-	wp_enqueue_script("swiper-cdn", "https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js", array(), _S_VERSION, true);
+	wp_enqueue_script("swiper-cdn", "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js", array(), _S_VERSION, true);
 	wp_enqueue_script("bootstrap", "https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js", array(), _S_VERSION, true);
 	wp_enqueue_script("swiper", get_template_directory_uri() . "/assets/js/swiper.js", array(), _S_VERSION, true);
 	wp_enqueue_script("modal", get_template_directory_uri() . "/assets/js/modal.js", array(), _S_VERSION, true);
+	wp_enqueue_script("main", get_template_directory_uri() . "/assets/js/main.js", array(), _S_VERSION, true);
+
 
 	if (is_singular() && comments_open() && get_option('thread_comments')) {
 		wp_enqueue_script('comment-reply');
@@ -302,64 +304,7 @@ add_action('init', 'create_catalog_post_type');
 
 // ====================================================================================
 // Category (tabs)
-function register_post_types()
-{
-	register_post_type('portfolio', [
-		'label' => null,
-		'labels' => [
-			'name' => 'Категория',
-			'singular_name' => 'Категория',
-			'add_new' => 'Добавить категорию',
-			'add_new_item' => 'Добавление категории',
-			'edit_item' => 'Редактирование категории',
-			'new_item' => 'Новая категория',
-			'view_item' => 'Смотреть категорию',
-			'search_items' => 'Искать категорию',
-			'not_found' => 'Не найдено',
-			'not_found_in_trash' => 'Не найдено в корзине',
-			'parent_item_colon' => '',
-			'menu_name' => 'Категория',
-		],
-		'public' => true,
-		'hierarchical' => false,
-		'supports' => ['title', 'editor', 'thumbnail', 'excerpt'],
-		'taxonomies' => ['portfolio_category'], // Добавление таксономии
-		'has_archive' => false,
-	]);
 
-}
-add_action('init', 'register_post_types');
-
-
-// Убедитесь, что таксономия 'category' зарегистрирована для кастомного типа записи// Регистрация новой таксономии
-function register_portfolio_taxonomy()
-{
-	$labels = array(
-		'name' => 'Категория',
-		'singular_name' => 'Категория',
-		'search_items' => 'Search Portfolio Categories',
-		'all_items' => 'All Portfolio Categories',
-		'parent_item' => 'Parent Portfolio Category',
-		'parent_item_colon' => 'Parent Portfolio Category:',
-		'edit_item' => 'Edit Portfolio Category',
-		'update_item' => 'Update Portfolio Category',
-		'add_new_item' => 'Add New Portfolio Category',
-		'new_item_name' => 'New Portfolio Category Name',
-		'menu_name' => 'Категория',
-	);
-
-	$args = array(
-		'hierarchical' => true,
-		'labels' => $labels,
-		'show_ui' => true,
-		'show_admin_column' => true,
-		'query_var' => true,
-		'rewrite' => array('slug' => 'add-category'),
-	);
-
-	register_taxonomy('portfolio_category', array('portfolio'), $args);
-}
-add_action('init', 'register_portfolio_taxonomy');
 // ====================================================================================
 // Аксессуары (панель управление)
 function create_products_post_type()

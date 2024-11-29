@@ -76,16 +76,16 @@ if (tabsList.length > 0) {
 // ================
 // Проверяем, существуют ли слайды
 let currentSlideIndex = 0;
-const slides = document.querySelectorAll('.slide');
+const slides = document.querySelectorAll(".slide");
 const totalSlides = slides.length;
 
 if (totalSlides > 0) {
-  document.getElementById('total-slides').textContent = totalSlides;
+  document.getElementById("total-slides").textContent = totalSlides;
 
   function showSlide(index) {
-    slides.forEach(slide => slide.classList.remove('active'));
-    slides[index].classList.add('active');
-    document.getElementById('current-slide').textContent = index + 1;
+    slides.forEach((slide) => slide.classList.remove("active"));
+    slides[index].classList.add("active");
+    document.getElementById("current-slide").textContent = index + 1;
   }
 
   function nextSlide() {
@@ -98,3 +98,10 @@ if (totalSlides > 0) {
     showSlide(currentSlideIndex);
   }
 }
+
+const swiper = new Swiper(".mySwiper", {
+  navigation: {
+    nextEl: ".swiper-button-next",
+    prevEl: ".swiper-button-prev",
+  },
+});
