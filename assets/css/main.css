@@ -761,10 +761,14 @@
   color: var(--white);
   top: 20px;
   left: 20px;
+  z-index: 100;
 }
 .accessories-card-wrapper .item .item-header img {
+  position: relative;
   width: 100%;
   max-width: 200px;
+  z-index: 50;
+  background-color: var(--grey);
 }
 .accessories-card-wrapper .item .item-body {
   padding: 20px;

@@ -66,16 +66,20 @@ get_header();
                             'order' => 'ASC',
                             'hide_empty' => false,
                         ];
+
                         $terms = get_terms($args);
 
                         foreach ($terms as $term) {
-                            ?>
-                            <li class="ap-tab-item active" data-category="products_category_<?= $term->term_id; ?>">
-                                <?php
-                                echo $term->name;
+                            $showInTabs = get_field('show_in_tabs', $term);
+                            if ($showInTabs == "yes") {
                                 ?>
-                            </li>
-                        <?
+                                <li class="ap-tab-item active" data-category="products_category_<?= $term->term_id; ?>">
+                                    <?php
+                                    echo $term->name;
+                                    ?>
+                                </li>
+                            <?
+                            }
                         }
                         ?>
                     </ul>

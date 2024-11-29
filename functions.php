@@ -190,6 +190,30 @@ if (function_exists('acf_add_options_page')) {
 }
 // Options footer end
 // ====================================================================================
+// Modal start
+if (function_exists('acf_add_options_page')) {
+	acf_add_options_page(array(
+		'page_title' => 'Настройки модального окна',
+		'menu_title' => 'Настройки модального окна',
+		'menu_slug' => 'modal-settings',
+		'capability' => 'edit_posts',
+		'redirect' => false
+	));
+}
+// Modal end
+// ====================================================================================
+// Modal start
+if (function_exists('acf_add_options_page')) {
+	acf_add_options_page(array(
+		'page_title' => 'Настройки верхняя шапка',
+		'menu_title' => 'Настройки верхняя шапка',
+		'menu_slug' => 'header-settings',
+		'capability' => 'edit_posts',
+		'redirect' => false
+	));
+}
+// Modal end
+// ====================================================================================
 // Добавил в виджет тект и спомощью этого функии добавили класс.
 function add_class_to_widget_title($title, $instance, $id_base)
 {
