@@ -57,7 +57,29 @@ get_header();
                     </div>
 
 
-                    <?php if (have_rows('certificates')): ?>
+                    <div class="col-12 col-xl-4 my-3">
+                        <div class="about-swiper-wrapper">
+                            <?php if (have_rows('certificates')): ?>
+                                <div class="swiper mySwiper">
+                                    <div class="swiper-wrapper">
+                                        <?php while (have_rows('certificates')):
+                                            the_row();
+                                            $image = get_sub_field('certificate_image');
+                                            ?>
+                                            <div class="swiper-slide">
+                                                <img src="<?php echo esc_url($image); ?>"
+                                                    alt="<?php echo esc_attr(basename($image)); ?>" />
+                                            </div>
+                                        <?php endwhile; ?>
+                                    </div>
+                                    <div class="swiper-button-next"></div>
+                                    <div class="swiper-button-prev"></div>
+                                </div>
+                            <?php endif; ?>
+
+                        </div>
+                    </div>
+                    <!-- <?php if (have_rows('certificates')): ?>
                         <div class="col-12 col-xl-4 my-3">
                             <div class="about-swiper-wrapper">
                                 <swiper-container class="mySwiper" navigation="true">
@@ -72,7 +94,7 @@ get_header();
                                 </swiper-container>
                             </div>
                         </div>
-                    <?php endif; ?>
+                    <?php endif; ?> -->
 
                 </div>
             </div>

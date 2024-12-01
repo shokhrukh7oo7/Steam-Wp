@@ -201,14 +201,14 @@
   margin: 1rem 0 0;
 }
 #breadcrumbs span a {
-  font-size: clamp(16px, 1.5vw, 20px);
+  font-size: clamp(15px, 2vw, 18px);
   color: var(--light-black);
 }
 #breadcrumbs span a:hover {
   color: var(--black);
 }
 #breadcrumbs .breadcrumb_last {
-  font-size: clamp(16px, 1.5vw, 20px);
+  font-size: clamp(15px, 2vw, 18px);
   color: var(--purple);
 }
 /* » */
@@ -381,16 +381,58 @@
   z-index: 1;
   display: block;
 }
+.about-page-wrapper .swiper .swiper-button-next {
+  background-color: var(--white);
+  border-radius: 50%;
+  padding: 0 20px;
+}
+.about-page-wrapper .swiper .swiper-button-next:hover {
+  background-color: var(--purple);
+}
+.about-page-wrapper .swiper .swiper-button-next:hover::after {
+  color: var(--white);
+}
+.about-page-wrapper .swiper img::selection {
+  background-color: transparent;
+}
+.about-page-wrapper .swiper .swiper-button-next::after {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--purple);
+}
+.about-page-wrapper .swiper .swiper-button-prev {
+  background-color: var(--white);
+  border-radius: 50%;
+  padding: 0 20px;
+}
+.about-page-wrapper .swiper .swiper-button-prev:hover {
+  background-color: var(--purple);
+}
+.about-page-wrapper .swiper .swiper-button-prev:hover::after {
+  color: var(--white);
+}
+.about-page-wrapper .swiper .swiper-button-prev::after {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--purple);
+}
 .card .swiper .swiper-button-next {
   background-color: var(--white);
   border-radius: 50%;
   padding: 0 20px;
 }
+.card .swiper .swiper-button-next:hover {
+  background-color: var(--purple);
+}
+.card .swiper .swiper-button-next:hover::after {
+  color: var(--white);
+}
 .card .swiper img::selection {
   background-color: transparent;
 }
 .card .swiper .swiper-button-next::after {
-  font-size: 25px;
+  font-size: 16px;
+  font-weight: 600;
   color: var(--purple);
 }
 .card .swiper .swiper-button-prev {
@@ -398,8 +440,15 @@
   border-radius: 50%;
   padding: 0 20px;
 }
+.card .swiper .swiper-button-prev:hover {
+  background-color: var(--purple);
+}
+.card .swiper .swiper-button-prev:hover::after {
+  color: var(--white);
+}
 .card .swiper .swiper-button-prev::after {
-  font-size: 25px;
+  font-size: 16px;
+  font-weight: 600;
   color: var(--purple);
 }
 .swiper-container {
@@ -472,6 +521,7 @@
   border-color: var(--border-color);
   opacity: 1;
   transform: scale(1);
+  overflow: hidden;
   transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
