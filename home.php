@@ -23,7 +23,7 @@ get_header();
                             <div class="text-content">
                                 <p><?php the_sub_field('slide_text'); ?></p>
                                 <h1><?php the_sub_field('slide_heading'); ?></h1>
-                                <a class="button" href="<?php the_field('button_link'); ?>">
+                                <a class="button" href="<?php echo get_the_permalink(30) ?>">
                                     <?php the_field('button_text'); ?>
                                 </a>
                                 <div class="pagination">
@@ -198,7 +198,7 @@ get_header();
                             <?php the_field('service_banner_description') ?>
                         </p>
 
-                        <a href="/assets/pages/about-us.html" class="btn constuction-service-banner-btn">
+                        <a href="<?php echo get_the_permalink(30) ?>" class="btn constuction-service-banner-btn">
                             <?php the_field('service_banner_button_text') ?>
                         </a>
                     </div>

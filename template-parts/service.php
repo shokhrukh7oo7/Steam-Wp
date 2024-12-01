@@ -9,6 +9,11 @@ get_header();
 <main>
   <section>
     <div class="container">
+      <?php
+      if (function_exists('yoast_breadcrumb')) {
+        yoast_breadcrumb('<p id="breadcrumbs">', '</p>');
+      }
+      ?>
       <div class="servise-top-information-wrapper">
         <div class="service-top-information-header">
           <?php the_field('service_header_title') ?>

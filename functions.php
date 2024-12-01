@@ -424,6 +424,21 @@ function create_products_post_type()
 add_action('init', 'create_products_post_type');
 
 // ====================================================================================
+add_filter('wpseo_breadcrumb_links', 'add_catalog_to_breadcrumbs');
+function add_catalog_to_breadcrumbs($links)
+{
+	if (is_tax('products_category') || is_singular('products')) {
+		// Добавляем ссылку на "Каталог"
+		$catalog_link = [
+			'url' => get_post_type_archive_link('products'),
+			'text' => 'Каталог',
+		];
+		// Вставляем "Каталог" перед текущей категорией/записью
+		array_splice($links, 1, 0, [$catalog_link]);
+	}
+	return $links;
+}
+// ====================================================================================
 add_filter('nav_menu_css_class', 'custom_footer_menu_css_class', 10, 1);
 
 function custom_footer_menu_css_class($classes)

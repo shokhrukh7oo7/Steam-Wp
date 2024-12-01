@@ -37,14 +37,14 @@
 							</a>
 
 							<div class="social-box">
-								<?php if (have_rows('social_links','option')): ?>
-									<?php while (have_rows('social_links','option')):
+								<?php if (have_rows('social_links', 'option')): ?>
+									<?php while (have_rows('social_links', 'option')):
 										the_row();
-										$url = get_sub_field('link_url','option');
-										$icon = get_sub_field('link_image','option');
+										$url = get_sub_field('link_url', 'option');
+										$icon = get_sub_field('link_image', 'option');
 										?>
 										<a href="<?php echo esc_url($url, 'option'); ?>" target="_blank">
-											<img src="<?php echo esc_html($icon,'option'); ?>" alt="Social Link" />
+											<img src="<?php echo esc_html($icon, 'option'); ?>" alt="Social Link" />
 										</a>
 									<?php endwhile; ?>
 								<?php endif; ?>
@@ -71,8 +71,8 @@
 					</button>
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<div class="search-wrapper">
-							<a href="/assets/pages/catalog.html" class="catalog-button">
-								<i class="fas fa-bars"></i> Каталог
+							<a href="<?php echo get_the_permalink(35) ?>" class="catalog-button">
+								<i class="fas fa-bars"></i> <?php the_field('btn_catalog', 'option')?>
 							</a>
 							<input type="text" class="searchTerm" placeholder="Поиск..." />
 							<button type="submit" class="searchButton">
@@ -81,7 +81,7 @@
 						</div>
 						<div class="navbar-leave-request-btn-wrapper">
 							<button class="btn leave-request-btn" id="leave-request-btn">
-								Оставить заявку
+								<?php the_field('btn_request', 'option') ?>
 							</button>
 						</div>
 					</div>
@@ -155,7 +155,7 @@
 	<div class="order-call-modal hidden" id="order-call-modal">
 		<div class="order-call-modal-header">
 			<h1 class="order-call-modal-header-title">
-				<?php the_field('order_header', 'options')?>
+				<?php the_field('order_header', 'options') ?>
 			</h1>
 			<button class="btn close-btn" id="order-close-btn">
 				<i class="fas fa-close"></i>
@@ -164,27 +164,27 @@
 		<div class="order-call-modal-body">
 			<div class="order-call-modal-left">
 				<p class="order-call-modal-description">
-					<?php the_field('order_description_title', 'options')?>
+					<?php the_field('order_description_title', 'options') ?>
 				</p>
 
 				<form>
 					<input type="tel" class="form-control order-call-modal-input" placeholder="+998(__) ___-__-__"
 						required />
 					<button class="btn order-call-modal-btn" id="order-call-modal-btn">
-						<?php the_field('order_btn_title', 'options')?>
+						<?php the_field('order_btn_title', 'options') ?>
 					</button>
 				</form>
 
 				<div class="order-call-modal-checkbox-wrapper">
 					<input type="checkbox" class="order-call-checkbox" />
 					<p class="order-call-modal-checkbox-title">
-						<?php the_field('order_privacy_policy_title', 'options')?>
-						 <a href="#"><?php the_field('order_privacy_policy_title_color', 'options')?></a>
+						<?php the_field('order_privacy_policy_title', 'options') ?>
+						<a href="#"><?php the_field('order_privacy_policy_title_color', 'options') ?></a>
 					</p>
 				</div>
 			</div>
 			<div class="order-call-modal-right">
-				<img src="<?php the_field('order_image', 'options')?>" alt="image" />
+				<img src="<?php the_field('order_image', 'options') ?>" alt="image" />
 				<div class="around-image"></div>
 			</div>
 		</div>

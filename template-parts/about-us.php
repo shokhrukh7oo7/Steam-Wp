@@ -9,6 +9,11 @@ get_header();
 <main>
     <section>
         <div class="container">
+            <?php
+            if (function_exists('yoast_breadcrumb')) {
+                yoast_breadcrumb('<p id="breadcrumbs">', '</p>');
+            }
+            ?>
             <div class="about-page-wrapper">
                 <div class="row">
                     <div class="col-12 col-xl-8 my-3">

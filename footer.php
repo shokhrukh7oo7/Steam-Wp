@@ -27,8 +27,7 @@
 						<form>
 							<input type="email" class="form-control"
 								placeholder="<?php the_field("footer_email_placeholder", "option") ?>" />
-							<a href="<?php the_field("footer_email_button_url", "option") ?>" 
-								class="btn footer-top-btn"
+							<a href="<?php the_field("footer_email_button_url", "option") ?>" class="btn footer-top-btn"
 								id="footer-top-btn">
 								<?php the_field("footer_email_button_text", "option") ?>
 							</a>
@@ -116,8 +115,8 @@
 							<?php if (have_rows('payment_icons', 'option')): ?>
 								<?php while (have_rows('payment_icons', 'option')):
 									the_row(); ?>
-									<a href="<?php the_sub_field('icon_link'); ?>">
-										<img src="<?php the_sub_field('icon_url'); ?>" alt="icon">
+									<a href="<?php the_sub_field('icon_link', 'option'); ?>">
+										<img src="<?php the_sub_field('icon_url', 'option'); ?>" alt="icon">
 									</a>
 								<?php endwhile; ?>
 							<?php endif; ?>
@@ -130,9 +129,12 @@
 							<div class="footer-social-wrapper">
 								<?php if (have_rows('social_links', 'option')): ?>
 									<?php while (have_rows('social_links', 'option')):
-										the_row(); ?>
-										<a href="<?php the_sub_field('icon_link'); ?>">
-											<img src="<?php the_sub_field('icon_url'); ?>" alt="icon">
+										the_row();
+										$url_foot = get_sub_field('link_url', 'option');
+										$icon_foot = get_sub_field('link_image', 'option');
+										?>
+										<a href="<?php echo esc_url($url_foot, 'option'); ?>">
+											<img src="<?php echo esc_html($icon_foot, 'option'); ?>" alt="icon">
 										</a>
 									<?php endwhile; ?>
 								<?php endif; ?>

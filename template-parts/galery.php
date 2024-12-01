@@ -8,6 +8,11 @@ get_header();
 <main>
     <section>
         <div class="container">
+            <?php
+            if (function_exists('yoast_breadcrumb')) {
+                yoast_breadcrumb('<p id="breadcrumbs">', '</p>');
+            }
+            ?>
             <div class="galery-container">
                 <div class="galery-header-wrapper">
                     <h1 class="galery-header-title">

@@ -174,6 +174,7 @@
 }
 .nav-link.active {
   border-bottom: 2px solid var(--purple);
+  display: inline-block;
 }
 .navbar-wrapper .navbar-bottom-wrapper-box .navbar-bottom-wrapper ul {
   padding: 0;
@@ -196,6 +197,21 @@
   a:hover {
   color: var(--purple);
 }
+#breadcrumbs {
+  margin: 1rem 0 0;
+}
+#breadcrumbs span a {
+  font-size: clamp(16px, 1.5vw, 20px);
+  color: var(--light-black);
+}
+#breadcrumbs span a:hover {
+  color: var(--black);
+}
+#breadcrumbs .breadcrumb_last {
+  font-size: clamp(16px, 1.5vw, 20px);
+  color: var(--purple);
+}
+/* » */
 /* ========= navbar bottom wrapper end ========== */
 /* HEADER CSS END */
 /* ========================================================================================== */
@@ -405,6 +421,8 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* min-height: 250px; */
+  min-height: 300px;
 }
 .ap-tab {
   display: flex;
@@ -1333,8 +1351,9 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 10px;
-  padding: 30px;
+  gap: 40px;
+  /* padding: 30px; */
+  /* padding: 30px 30px 0; */
   height: auto;
   aspect-ratio: 2 / 1;
   position: relative;
@@ -1344,6 +1363,7 @@
   font-weight: 600;
   font-size: clamp(15px, 2vw, 20px);
   height: 40px;
+  padding: 30px 30px 0;
 }
 .catalog-page-wrapper .item a::before {
   content: "";
@@ -1354,7 +1374,7 @@
 .catalog-page-wrapper .item .catalog-page-img img {
   width: 100%;
   height: 250px;
-  object-fit: none;
+  object-fit: contain;
 }
 /* CATALOG PAGE CSS END */
 
@@ -1850,11 +1870,16 @@
   opacity: 1;
   transform: scale(1);
   transition: opacity 0.5s ease, transform 0.5s ease;
+  overflow: hidden;
+}
+.catalog-item .card img {
+  border-top-left-radius: 22px;
+  border-top-right-radius: 22px;
 }
 .catalog-item .card h4 {
   color: var(--black);
   font-weight: 600;
-  font-size: clamp(18px, 2.5vw, 22px);
+  font-size: clamp(15px, 1.5vw, 18px);
   padding: 0 0 0 20px;
   margin-top: 10px;
 }
@@ -1862,7 +1887,7 @@
   color: var(--light-black);
   font-size: clamp(15px, 2vw, 17px);
   padding: 0 0 0 20px;
-  margin-bottom: 10px;
+  margin-bottom: 0;
   text-decoration: line-through;
 }
 .catalog-item .card .product-summ {
@@ -1870,7 +1895,7 @@
   font-weight: 600;
   font-size: clamp(15px, 2vw, 18px);
   padding: 0 0 0 20px;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 .catalog-item .card .view-products {
   background-color: var(--purple);
