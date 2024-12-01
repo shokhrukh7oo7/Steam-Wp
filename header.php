@@ -72,12 +72,15 @@
 					<div class="collapse navbar-collapse" id="navbarSupportedContent">
 						<div class="search-wrapper">
 							<a href="<?php echo get_the_permalink(35) ?>" class="catalog-button">
-								<i class="fas fa-bars"></i> <?php the_field('btn_catalog', 'option')?>
+								<i class="fas fa-bars"></i> <?php the_field('btn_catalog', 'option') ?>
 							</a>
-							<input type="text" class="searchTerm" placeholder="Поиск..." />
-							<button type="submit" class="searchButton">
-								<i class="fa fa-search"></i>
-							</button>
+							<form role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
+								<input type="text" name="s" class="searchTerm" placeholder="Поиск..."
+									value="<?php echo get_search_query(); ?>" />
+								<button type="submit" class="searchButton">
+									<i class="fa fa-search"></i>
+								</button>
+							</form>
 						</div>
 						<div class="navbar-leave-request-btn-wrapper">
 							<button class="btn leave-request-btn" id="leave-request-btn">

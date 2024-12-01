@@ -103,6 +103,35 @@
   display: flex;
   margin: 0 auto;
 }
+.navbar-wrapper .navbar .navbar-collapse .search-wrapper form {
+  width: 100%;
+  display: flex;
+}
+.search-card {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 20px;
+}
+.search-card .card-top img {
+  /* width: 100%; */
+  max-width: 400px;
+}
+.search-card .card-bottom a {
+  color: var(--light-black);
+}
+.search-card .card-bottom a h6 {
+  font-size: clamp(15px, 2vw, 18px);
+}
+.search-card .card-bottom .card-last-seen-recently {
+  color: var(--light-black);
+}
+.search-card .card-bottom .card-last-seen-recently .date {
+  font-size: clamp(13px, 1vw, 15px);
+}
+.search-card .card-bottom a:hover {
+  color: var(--purple);
+}
 .navbar-wrapper .navbar .navbar-collapse .search-wrapper .searchTerm {
   width: 100%;
   border: 1px solid var(--purple);

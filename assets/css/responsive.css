@@ -160,6 +160,13 @@
 
 /* ========== 576 ========== */
 @media (max-width: 576px) {
+  .search-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    align-items: center;
+    gap: 20px;
+  }
   #banner-swiper .image-content img {
     height: 300px;
   }

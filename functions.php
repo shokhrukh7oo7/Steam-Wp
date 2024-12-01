@@ -459,6 +459,11 @@ function custom_nav_menu_css_class($classes)
 }
 
 // ------------------------------------------------------------------------
+function date_show($date)
+{
+	echo '<p class="date">' . get_the_date('d.m.Y | H:i') . '</p>';
+}
+// ------------------------------------------------------------------------
 
 // повесим на все ссылки класс nav-link
 add_filter('nav_menu_link_attributes', 'custom_nav_menu_link_attributes', 10, 1);
