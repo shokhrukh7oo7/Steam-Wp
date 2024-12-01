@@ -1137,6 +1137,8 @@
   width: 100%;
   max-width: 500px;
   border-radius: 14px;
+  height: auto;
+  aspect-ratio: 3 / 2;
 }
 .view-products-modal-body-left .switcher-bottom {
   display: flex;
@@ -1149,6 +1151,7 @@
   max-width: 50px;
   height: 50px;
   border-radius: 14px;
+  cursor: pointer;
 }
 .view-products-modal
   .view-products-modal-body

@@ -26,9 +26,6 @@ if (sliderElement) {
   });
 }
 
-
-
-
 // swiper nasted swiper js
 const sliderImages = document.querySelectorAll(".slider-image");
 
@@ -44,3 +41,15 @@ sliderImages.forEach((sliderImage) => {
 });
 //
 
+// view modal image switcher
+const switcherBottom = document.querySelectorAll(".switcher-bottom img");
+const switcherTop = document.querySelector(".switcher-top img");
+
+switcherBottom.forEach((img) => {
+  img.addEventListener("click", (e) => {
+    switcherTop.src = img.src;
+  });
+});
+switcherTop.addEventListener("click", (e) => {
+  e.target.requestFullscreen();
+});

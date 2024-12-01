@@ -100,6 +100,15 @@
 
 /* ========== 768 ========== */
 @media (max-width: 768px) {
+  .view-products-modal {
+    padding: 25px 30px;
+}
+  .view-products-modal-body {
+    flex-direction: column;
+  }
+  .view-products-modal-body-left .switcher-top img {
+    max-width: 769px;
+  }
   #banner-swiper .image-content img {
     height: 350px;
   }
@@ -233,6 +242,9 @@
 }
 
 @media (max-width: 480px) {
+  .view-products-modal {
+    padding: 20px 15px;
+}
   #banner-swiper .image-content img {
     height: 300px;
   }
