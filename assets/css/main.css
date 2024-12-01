@@ -1105,6 +1105,148 @@
 
 /* ========================================================================================== */
 
+/* ----- view modal css start ----- */
+.view-products-modal {
+  position: fixed;
+  width: 100%;
+  max-width: 790px;
+  background-color: var(--white);
+  padding: 25px 50px;
+  border-radius: 16px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+}
+.view-products-modal .view-products-modal-header {
+  display: flex;
+  justify-content: end;
+  align-items: end;
+}
+.view-products-modal-body {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+.view-products-modal .view-products-modal-body .view-products-modal-body-left {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.view-products-modal-body-left .switcher-top img {
+  width: 100%;
+  max-width: 500px;
+  border-radius: 14px;
+}
+.view-products-modal-body-left .switcher-bottom {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.view-products-modal-body-left .switcher-bottom img {
+  width: 100%;
+  max-width: 50px;
+  height: 50px;
+  border-radius: 14px;
+}
+.view-products-modal
+  .view-products-modal-body
+  .view-products-modal-body-right
+  .slider-right-content-header {
+  font-size: clamp(18px, 2vw, 24px);
+  color: var(--black);
+}
+.view-products-modal
+  .view-products-modal-body
+  .view-products-modal-body-right
+  .right-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: normal;
+  gap: 10px;
+}
+.view-products-modal
+  .view-products-modal-body
+  .view-products-modal-body-right
+  .right-content-wrapper
+  .right-content-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.view-products-modal
+  .view-products-modal-body
+  .view-products-modal-body-right
+  .right-content-wrapper
+  .right-content-info
+  .right-content-left-title {
+  font-size: clamp(17px, 2vw, 20px);
+  color: var(--light-black);
+  margin: 0;
+}
+.view-products-modal
+  .view-products-modal-body
+  .view-products-modal-body-right
+  .right-content-wrapper
+  .right-content-info
+  .right-content-right-title {
+  font-size: clamp(17px, 2vw, 20px);
+  font-weight: 500;
+  color: var(--black);
+  margin: 0;
+}
+.view-products-modal
+  .view-products-modal-body
+  .view-products-modal-body-right
+  .materials-wrapper
+  .materials-header {
+  font-size: clamp(18px, 2vw, 24px);
+  color: var(--black);
+}
+.view-products-modal
+  .view-products-modal-body
+  .view-products-modal-body-right
+  .materials-wrapper
+  .materials-description {
+  font-size: clamp(17px, 2vw, 20px);
+  color: var(--light-black);
+  margin-bottom: 0.5rem;
+}
+.view-products-modal
+  .view-products-modal-body
+  .view-products-modal-body-right
+  .product-sum
+  .switcher-bottom-sale {
+  font-size: clamp(17px, 2vw, 20px);
+  color: var(--light-black);
+  text-decoration: line-through;
+  margin-bottom: 0.5rem;
+}
+.view-products-modal
+  .view-products-modal-body
+  .view-products-modal-body-right
+  .product-sum
+  .switcher-bottom-summ {
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 600;
+  color: var(--black);
+  margin-bottom: 0.5rem;
+}
+.view-products-modal
+  .view-products-modal-body
+  .view-products-modal-body-right
+  .buy-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: clamp(17px, 2vw, 20px);
+  color: var(--white);
+  background-color: var(--purple);
+}
+/* ----- view modal css end ----- */
 /* ----- request modal css start ----- */
 .request-modal {
   position: fixed;

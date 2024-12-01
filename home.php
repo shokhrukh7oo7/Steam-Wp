@@ -143,7 +143,7 @@ get_header();
                                         <h4><?php the_title(); ?></h4>
                                         <p class="sale"><?php the_field('price') ?> UZS</p>
                                         <p class="product-summ"><?php the_field('sale_price') ?> UZS</p>
-                                        <a href="/assets/pages/catalog.html" class="btn view-products" id="view-products">
+                                        <a href="#" class="btn view-products" id="view-products">
                                             <?php the_field('btn_text') ?>
                                         </a>
                                     </div>

@@ -9,6 +9,10 @@ const closeOrderBtn = document.getElementById("order-close-btn");
 const footerBtn = document.getElementById("footer-middle-btn");
 const overlay = document.getElementById("overlay");
 
+const viewProducts = document.querySelectorAll(".view-products");
+const viewModal = document.getElementById("view-products-modal");
+const viewCloseBtn = document.getElementById("view-close-btn");
+
 const serviceBtn = document.getElementById("service-leave-request-btn");
 // Toggle modal visibility
 const toggleModal = (modal, show = true) => {
@@ -19,7 +23,7 @@ const toggleModal = (modal, show = true) => {
 // Event handlers for showing and hiding modals
 showRequestBtn.addEventListener("click", () => toggleModal(requestModal, true));
 closeRequestBtn.addEventListener("click", () =>
-  toggleModal(requestModal, false)
+  toggleModal(requestModal, false),
 );
 if (serviceBtn) {
   serviceBtn.addEventListener("click", () => toggleModal(requestModal, true));
@@ -27,13 +31,17 @@ if (serviceBtn) {
 
 showOrderCallBtn.addEventListener("click", () => toggleModal(orderModal, true));
 closeOrderBtn.addEventListener("click", () => toggleModal(orderModal, false));
-
 footerBtn.addEventListener("click", () => toggleModal(orderModal, true));
 
+viewProducts.forEach((button) => {
+  button.addEventListener("click", () => toggleModal(viewModal, true));
+});
+viewCloseBtn.addEventListener("click", () => toggleModal(viewModal, false));
 // Hide modals when overlay is clicked
 overlay.addEventListener("click", () => {
   toggleModal(requestModal, false);
   toggleModal(orderModal, false);
+  toggleModal(viewModal, false);
 });
 
 // Close modals with the Escape key
@@ -41,6 +49,7 @@ document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
     toggleModal(requestModal, false);
     toggleModal(orderModal, false);
+    toggleModal(viewModal, false);
   }
 });
 

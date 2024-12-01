@@ -194,6 +194,63 @@
 	</div>
 	<!-- ----- order call modal end ----- -->
 
+	<!-- ----- view products modal start ----- -->
+	<div class="view-products-modal hidden" id="view-products-modal">
+		<div class="view-products-modal-header">
+			<button class="btn close-btn" id="view-close-btn">
+				<i class="fas fa-close"></i>
+			</button>
+		</div>
+
+		<div class="view-products-modal-body ">
+			<div class="view-products-modal-body-left">
+				<div class="switcher-top">
+					<img src="https://cdn.pixabay.com/photo/2023/05/22/10/49/houses-8010401_1280.jpg" width="100%" />
+				</div>
+				<div class="switcher-bottom">
+					<img src="https://cdn.pixabay.com/photo/2023/05/22/10/49/houses-8010401_1280.jpg" width="100%"
+						data-id="1" class="slider_click" />
+					<img src="https://cdn.pixabay.com/photo/2023/07/13/05/36/mountains-8123933_1280.jpg" width="100%"
+						data-id="2" class="slider_click" />
+					<img src="https://cdn.pixabay.com/photo/2022/12/12/21/35/stream-7651969_1280.jpg" width="100%"
+						data-id="3" class="slider_click" />
+					<img src="https://cdn.pixabay.com/photo/2022/10/24/20/22/muhlviertel-7544316_1280.jpg"
+						width="100%" />
+					<img src="https://cdn.pixabay.com/photo/2024/02/21/14/14/mountains-8587802_1280.jpg" width="100%" />
+				</div>
+			</div>
+			<div class="view-products-modal-body-right">
+				<h3 class="slider-right-content-header">Баня гормония</h3>
+				<div class="right-content-wrapper">
+					<div class="right-content-info">
+						<p class="right-content-left-title">Площадь:</p>
+						<p class="right-content-right-title">9,84 кВ м</p>
+					</div>
+					<div class="right-content-info">
+						<p class="right-content-left-title">Сроки:</p>
+						<p class="right-content-right-title">9 дней</p>
+					</div>
+					<div class="right-content-info">
+						<p class="right-content-left-title">Печь:</p>
+						<p class="right-content-right-title">Aito AK-68</p>
+					</div>
+				</div>
+				<div class="materials-wrapper">
+					<h1 class="materials-header">Материалы:</h1>
+					<p class="materials-description">
+						Ольха, Натуральный камень талькомагнезит
+					</p>
+				</div>
+				<div class="product-sum">
+					<p class="switcher-bottom-sale">3 990 000 UZS</p>
+					<p class="switcher-bottom-summ">2 990 000 UZS</p>
+				</div>
+				<a href="#" class="btn buy-btn" id="buy-btn">Купить</a>
+			</div>
+		</div>
+	</div>
+	<!-- ----- view products modal end ----- -->
+
 
 	<div class="overlay hidden" id="overlay"></div>
 	<!-- MAIN END -->
