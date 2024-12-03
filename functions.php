@@ -337,8 +337,8 @@ function create_products_post_type()
 		'products',
 		array(
 			'labels' => array(
-				'name' => __('Товары'),
-				'singular_name' => __('Товары'),
+				'name' => __('Каталог'),
+				'singular_name' => __('Каталог'),
 				'add_new' => 'Добавить Товаров',
 				'add_new_item' => 'Добавление Товаров',
 				'edit_item' => 'Редактирование Товаров',
@@ -348,7 +348,7 @@ function create_products_post_type()
 				'not_found' => 'Не найдено',
 				'not_found_in_trash' => 'Не найдено в корзине',
 				'parent_item_colon' => '',
-				'menu_name' => 'Товары',
+				'menu_name' => 'Каталог',
 			),
 			'public' => true,
 			'has_archive' => true,
